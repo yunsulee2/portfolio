@@ -534,7 +534,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
       </div>
       <div class="shots">
         <img src="assets/hackathon-2026.jpg" alt="2026 교내 해커톤 우수상" loading="lazy"
-             style="width:100%;border-radius:14px;border:1px solid var(--line);display:block">
+             style="display:block;max-width:360px;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);margin:0 auto">
       </div>
     </div>
   </div>
@@ -574,13 +574,30 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 <!-- CONTACT -->
 <section id="contact"><div class="wrap contact">
   <div class="shead rev"><span class="tag">05</span><h2>Contact</h2><span class="ln"></span><span class="kr">연락</span></div>
-  <div class="big rev">함께<br>만들어요<span class="ac">.</span></div>
-  <p class="sub rev">새로운 아이디어를 빠르게 제품으로 만들 사람이 필요하다면 언제든 연락 주세요.</p>
-  <div class="cgrid rev">
-    <div class="crow"><span class="cl">Email</span><a class="cv" href="mailto:10lys0404@naver.com">10lys0404@naver.com</a><button class="copy" data-copy="10lys0404@naver.com">Copy</button></div>
-    <div class="crow"><span class="cl">Phone</span><a class="cv" href="tel:01063946903">010-6394-6903</a><button class="copy" data-copy="010-6394-6903">Copy</button></div>
+  <div class="rev" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:24px">
+    <div>
+      <div class="big">함께<br>만들어요<span class="ac">.</span></div>
+      <p class="sub" style="margin-top:18px">새로운 아이디어를 빠르게 제품으로 만들 사람이 필요하다면 언제든 연락 주세요.</p>
+      <div class="cgrid" style="margin-top:28px">
+        <div class="crow"><span class="cl">Email</span><a class="cv" href="mailto:10lys0404@naver.com">10lys0404@naver.com</a><button class="copy" data-copy="10lys0404@naver.com">Copy</button></div>
+        <div class="crow"><span class="cl">Phone</span><a class="cv" href="tel:01063946903">010-6394-6903</a><button class="copy" data-copy="010-6394-6903">Copy</button></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <img src="assets/profile.jpg" alt="이윤수 프로필" loading="lazy"
+           style="display:block;width:100%;max-width:300px;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:1px solid var(--line)">
+    </div>
   </div>
 </div></section>
+
+<style>
+  @media (max-width: 720px) {
+    #contact .wrap.contact > .rev[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+  }
+</style>
 
 <footer><div class="wrap fin">
   <span class="mono">© 2026 이윤수 · LEE YOONSOO</span>
