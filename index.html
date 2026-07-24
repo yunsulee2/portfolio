@@ -894,6 +894,10 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
           <div class="tech"><span class="tag">코드게이트 2026</span><span class="tag">React 19</span><span class="tag">TypeScript</span><span class="tag">ECharts</span></div>
         </div>
       </div>
+      <div class="wshots awshots">
+        <div class="wshot"><img src="assets/projects/codegate/1.jpg" alt="코드게이트 AI 스타트업 해커톤 종합 1위 시상 — 팀 단체" loading="lazy"></div>
+        <div class="wshot"><img src="assets/projects/codegate/2.jpg" alt="코드게이트 종합 1위 상장·시상 보드" loading="lazy"></div>
+      </div>
     </div>
   </div>
 
@@ -1049,6 +1053,11 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 .pf-count{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#8B90A2;margin-left:auto}
 .pf-count b{color:#fff}
 .pf-single .pf-ctrl{display:none}
+/* award photo strip — equal-height, mixed orientation */
+.awshots{display:flex;flex-wrap:wrap;gap:16px}
+.awshots .wshot{height:clamp(280px,34vw,400px)}
+.awshots .wshot img{width:auto;height:100%}
+@media(max-width:560px){.awshots .wshot{height:auto;width:100%}.awshots .wshot img{width:100%;height:auto}}
 @media(max-width:860px){
   .pf-panel{grid-template-columns:1fr;gap:26px;min-height:auto;padding:70px 24px}
   .pf-view{order:-1}
