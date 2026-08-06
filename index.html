@@ -1295,7 +1295,7 @@ document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
 /* Rebuild Work into per-project panels with own image carousel (scroll = next project) */
 (function(){
   const work=document.getElementById('work');if(!work)return;
-  const entries=[...work.querySelectorAll('.entry')];if(!entries.length)return;
+  const entries=[...work.querySelectorAll('.entry:not([data-portfolio-status="archived"])')];if(!entries.length)return;
   const showcase=document.querySelector('.showcase');
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const sec=document.createElement('section');sec.id='portfolio';
