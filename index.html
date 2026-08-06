@@ -87,6 +87,7 @@ section{padding:104px 0;border-top:1px solid var(--line)}
 
 /* PROJECT ENTRY */
 .entry{border:1px solid var(--line);background:var(--bg2);border-radius:var(--radius);margin-bottom:22px;box-shadow:var(--shadow);transition:border-color .3s,box-shadow .35s,transform .35s}
+#work .entry.archived-project{display:none!important}
 .entry:hover{border-color:var(--line2);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
 .ehead{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:start;padding:30px 30px 24px}
 .eindex{font-family:var(--serif);font-weight:500;font-size:44px;line-height:.9;color:var(--line3);letter-spacing:-.02em}
@@ -370,7 +371,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 
 <!-- WORK -->
 <section id="work"><div class="wrap">
-  <div class="shead rev"><span class="tag">01</span><h2>Work Index</h2><span class="ln"></span><span class="kr">17 Projects</span></div>
+  <div class="shead rev"><span class="tag">01</span><h2>Work Index</h2><span class="ln"></span><span class="kr">13 Projects</span></div>
 
    <!-- 01 mukbang -->
    <div class="entry rev">
@@ -549,8 +550,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
      </div>
    </div>
 
-<!-- 06 gov -->
-   <div class="entry rev">
+<!-- ARCHIVED · 정부혜택 한눈에: 데이터와 이미지는 복원을 위해 소스에 보관 -->
+   <div class="entry rev archived-project" data-portfolio-status="archived" hidden>
      <div class="ehead">
        <div class="eindex">06</div>
        <div class="etitle">
@@ -587,7 +588,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
    <!-- 04 kb -->
    <div class="entry rev">
      <div class="ehead">
-       <div class="eindex">07</div>
+       <div class="eindex">06</div>
        <div class="etitle">
          <h3>이거뭐지? <span class="en">소비 · 숨은 구독 탐지</span></h3>
          <p class="desc">카드·계좌 거래내역을 AI가 분석해 매달 빠져나가는 <b>숨은 구독</b>을 자동으로 찾아주는 소비 관리 앱. 반복 결제 패턴을 감지해 안 쓰는 구독을 알려주고, 자연어로 소비 내역을 물어볼 수 있습니다.</p>
@@ -621,7 +622,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
    <!-- 05 obstacle -->
    <div class="entry rev">
      <div class="ehead">
-       <div class="eindex">08</div>
+       <div class="eindex">07</div>
        <div class="etitle">
          <h3>디지털 연습실 <span class="en">디지털 취약계층 훈련 · Social Impact</span></h3>
          <p class="desc">디지털 취약계층이 배달·쇼핑·은행 앱을 <b>‘틀려도 혼나지 않는’</b> 환경에서 될 때까지 연습하는 훈련 앱. 실제 앱을 본뜬 화면 위에서 코치가 누를 곳을 짚어주고, 따라하기 → 시험 → 실전 3단계로 숙달을 돕습니다.</p>
@@ -656,7 +657,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
    <!-- 07 spyair -->
    <div class="entry rev">
      <div class="ehead">
-       <div class="eindex">09</div>
+       <div class="eindex">08</div>
        <div class="etitle">
          <h3>SPYAIR JUST LIKE THIS <span class="en">콘서트 인터랙티브 랜딩</span></h3>
          <p class="desc">일본 밴드 SPYAIR의 첫 한국 야외 라이브 ‘JUST LIKE THIS 2026’을 위한 <b>스크롤 인터랙티브 랜딩 페이지</b>. 스크롤에 맞춰 무대 영상이 확대되는 시네마틱 연출로 공연 소개부터 예매까지 자연스럽게 이어집니다.</p>
@@ -690,7 +691,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
       <!-- jpop -->
    <div class="entry rev">
      <div class="ehead">
-       <div class="eindex">10</div>
+       <div class="eindex">09</div>
        <div class="etitle">
          <h3>리리크 <span class="en">LYRIC</span> <span class="en">J-pop 가사 학습</span></h3>
          <p class="desc">J팝 가사를 <b>줄 단위로 끊어 따라 말하며</b> 일본어를 익히는 학습 앱. 좋아하는 곡의 가사를 한글 발음 · 토큰별 색상 일본어 · 한국어 번역으로 동시에 보여주고, 줄 반복·구간 이동으로 한 줄씩 완벽하게 익힙니다.</p>
@@ -725,7 +726,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
       <!-- baton (codegate 본선) -->
    <div class="entry rev">
      <div class="ehead">
-       <div class="eindex">11</div>
+       <div class="eindex">10</div>
        <div class="etitle">
          <h3>바통 <span class="en">BATON</span> <span class="en">AI 인수인계 자동화</span></h3>
          <p class="desc"><b>제조 현장의 숙련공이 떠나기 전</b>, 머릿속에만 있는 판단 노하우(왜·언제·예외)를 AI가 <b>소크라테스식 심층 질문</b>으로 캐물어 구조화된 인수인계 문서·지식 그래프로 남기는 서비스. "바통터치"로 넘기고 "바통창고"에 남깁니다. <b>2026 코드게이트 AI 스타트업 해커톤 종합 1위작</b> — <b>193팀 중 1등</b>(주제: 업무·생산성), <b>무박 2일</b> 개발.</p>
@@ -760,7 +761,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 <!-- 01 PAL -->
   <div class="entry rev">
     <div class="ehead">
-      <div class="eindex">12</div>
+      <div class="eindex">11</div>
       <div class="etitle">
         <h3>PAL <span class="en">회원관리 · PT 관리</span></h3>
         <p class="desc">트레이너와 회원을 잇는 PT 관리 앱. 기획 단계에 <b>실제 헬스장 5곳을 방문해 트레이너·회원을 직접 인터뷰</b>하며 양쪽의 페인포인트를 발굴했고, 그 결과를 토대로 회원 관리 · AI 운동 커리큘럼 · 인바디 추적 · 식단 분석까지 PT 운영의 전 과정을 한 앱에 담았습니다.</p>
@@ -799,7 +800,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
   <!-- 02 데과부 -->
   <div class="entry rev">
     <div class="ehead">
-      <div class="eindex">13</div>
+      <div class="eindex">12</div>
       <div class="etitle">
         <h3>데과부 <span class="en">DGB · 학과 커뮤니티</span></h3>
         <p class="desc">데이터과학부 전용 커뮤니티 앱. 닉네임으로 부담 없이 묻고, 학과 정보가 친분이 아니라 ‘구조’로 흐르도록 설계했습니다. <b>기획·설계·개발 전 과정에 참여</b>했으며, <b>출시 1주일 만에 사용자 100명을 확보</b>했습니다.</p>
@@ -837,8 +838,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
     </div>
   </div>
 
-  <!-- 04 RUNA -->
-  <div class="entry rev">
+  <!-- ARCHIVED · RUNA: 데이터와 이미지는 복원을 위해 소스에 보관 -->
+  <div class="entry rev archived-project" data-portfolio-status="archived" hidden>
     <div class="ehead">
       <div class="eindex">14</div>
       <div class="etitle">
@@ -871,8 +872,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
     </div>
   </div>
 
-  <!-- 05 리워드 -->
-  <div class="entry rev">
+  <!-- ARCHIVED · 운동 리워드: 데이터와 이미지는 복원을 위해 소스에 보관 -->
+  <div class="entry rev archived-project" data-portfolio-status="archived" hidden>
     <div class="ehead">
       <div class="eindex">15</div>
       <div class="etitle">
@@ -905,7 +906,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
   <!-- 06 곁에 -->
   <div class="entry rev">
     <div class="ehead">
-      <div class="eindex">16</div>
+      <div class="eindex">13</div>
       <div class="etitle">
         <h3>곁에 <span class="en">요양원 비교 · 예약</span></h3>
         <p class="desc">‘아고다처럼, 요양원을 한곳에서.’ 정부평가 등급 · 비용 · 편의시설 · 후기를 한눈에 비교하고 상담까지 신청하는 어르신 시설 탐색 플랫폼. 요양원 · 치매전담 · 주야간보호 · 실버타운 등 다양한 유형을 다룹니다.</p>
@@ -939,8 +940,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
     </div>
   </div>
 
-  <!-- 07 GRIT -->
-  <div class="entry rev">
+  <!-- ARCHIVED · GRIT: 데이터와 이미지는 복원을 위해 소스에 보관 -->
+  <div class="entry rev archived-project" data-portfolio-status="archived" hidden>
     <div class="ehead">
       <div class="eindex">17</div>
       <div class="etitle">
