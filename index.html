@@ -244,7 +244,6 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
     <div class="h2-logo"><span class="mk">LY</span> 이윤수</div>
     <div class="h2-menu">
       <a href="#portfolio">Portfolio</a>
-      <a href="#stack">Skills</a>
       <a href="#awards">Awards</a>
       <a href="#contact" class="cta">Contact me</a>
     </div>
@@ -284,7 +283,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 .sc-tags span{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:6px 10px;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#CBCFDA}
 .sc-link{display:inline-flex;align-items:center;gap:8px;margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:4px;transition:color .2s,border-color .2s}
 .sc-link:hover{color:#9CA0FF;border-color:#9CA0FF}
-.sc-img{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 90px -34px rgba(0,0,0,.85);aspect-ratio:16/10;background:#05060A}
+.sc-img{position:relative;border-radius:0;overflow:hidden;border:0;box-shadow:none;aspect-ratio:16/10;background:transparent}
 .sc-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .sc-foot{display:flex;align-items:center;gap:20px;margin-top:36px}
 .sc-dots{display:flex;gap:8px}
@@ -1138,40 +1137,9 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
   </div>
 </div></section>
 
-<!-- PROCESS -->
-<section id="process"><div class="wrap">
-  <div class="shead rev"><span class="tag">03</span><h2>Process</h2><span class="ln"></span><span class="kr">작업 방식</span></div>
-  <div class="proc">
-    <div class="rev">
-      <div class="lede">AI를 <span class="ac">빠르게</span>, 그러나 <span class="ac">검증하며</span> 씁니다.</div>
-      <p style="margin-top:22px">짧은 기간에 여러 앱을 출시할 수 있었던 건, AI 코딩 도구를 막연히 쓰지 않았기 때문입니다. <b>구조와 규칙을 먼저 정의(design.md)</b>한 뒤 코드를 생성하고, 결과를 반드시 검증합니다.</p>
-      <p>데과부는 이 방식으로 <b>팀 협업 1주일 만에 양대 마켓에 출시</b>했습니다. “AI를 잘 쓰는 것만큼, 결과물을 어떻게 점검할지 설계하는 것이 중요하다”는 게 핵심입니다.</p>
-    </div>
-    <ul class="steps rev">
-      <li><span class="no">01</span><div><h4>구조 정의 — design.md</h4><p>아키텍처와 규칙을 문서로 먼저 고정한 뒤 그 위에서 코드를 생성합니다.</p></div></li>
-      <li><span class="no">02</span><div><h4>교차 검토 — Claude × Codex</h4><p>두 AI로 코드를 교차 점검해 설계 위반과 미묘한 결함을 잡아냅니다.</p></div></li>
-      <li><span class="no">03</span><div><h4>실기기 검증</h4><p>여러 기기에서 직접 테스트(예: Android 하단 네비게이션 가림 이슈 해결)하며 출시 품질을 맞춥니다.</p></div></li>
-      <li><span class="no">04</span><div><h4>사용자 검증 → 출시</h4><p>기획 단계 사용자 인터뷰부터 출시 후 피드백까지, 실제 사용자를 기준으로 다듬습니다.</p></div></li>
-    </ul>
-  </div>
-</div></section>
-
-<!-- STACK -->
-<section id="stack"><div class="wrap">
-  <div class="shead rev"><span class="tag">04</span><h2>Stack</h2><span class="ln"></span><span class="kr">기술</span></div>
-  <div class="stack rev">
-    <div class="srow"><div class="cat">Core</div><div class="items"><span class="tag">Flutter</span><span class="tag">Dart</span></div></div>
-    <div class="srow"><div class="cat">Backend</div><div class="items"><span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">REST API</span></div></div>
-    <div class="srow"><div class="cat">Features</div><div class="items"><span class="tag">소셜 로그인</span><span class="tag">상태관리 · 캐싱(SWR)</span><span class="tag">카메라 · 이미지 업로드</span><span class="tag">GPS · 지도</span><span class="tag">비디오 플레이어</span><span class="tag">인앱 차트</span><span class="tag">푸시 알림</span></div></div>
-    <div class="srow"><div class="cat">AI</div><div class="items"><span class="tag">LLM API 연동</span><span class="tag">커리큘럼 생성</span><span class="tag">챗봇</span><span class="tag">식단 분석</span></div></div>
-    <div class="srow"><div class="cat">Tooling</div><div class="items"><span class="tag">Git</span><span class="tag">Claude Code</span><span class="tag">Codex</span></div></div>
-    <div class="srow"><div class="cat">Release</div><div class="items"><span class="tag">App Store</span><span class="tag">Google Play</span></div></div>
-  </div>
-</div></section>
-
 <!-- CONTACT -->
 <section id="contact"><div class="wrap contact">
-  <div class="shead rev"><span class="tag">05</span><h2>Contact</h2><span class="ln"></span><span class="kr">연락</span></div>
+  <div class="shead rev"><span class="tag">03</span><h2>Contact</h2><span class="ln"></span><span class="kr">연락</span></div>
   <div class="rev" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:24px">
     <div>
       <div class="big">함께<br>만들어요<span class="ac">.</span></div>
@@ -1214,8 +1182,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 .pf-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
 .pf-tags span{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;padding:6px 10px;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#CBCFDA}
 .pf-view{position:relative}
-.pf-stage{position:relative;height:min(64vh,566px);background:#05060A;border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -34px rgba(0,0,0,.85)}
-.pf-stage img{position:absolute;inset:0;margin:auto;max-width:90%;max-height:90%;width:auto;height:auto;opacity:0;transition:opacity .45s ease;cursor:zoom-in}
+.pf-stage{position:relative;height:min(64vh,566px);background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none}
+.pf-stage img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;width:auto;height:auto;opacity:0;transition:opacity .45s ease;cursor:zoom-in}
 .pf-stage img.on{opacity:1}
 .pf-ctrl{display:flex;align-items:center;gap:16px;margin-top:20px}
 .pf-arrows{display:flex;gap:10px}
@@ -1236,6 +1204,36 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
   .pf-panel{grid-template-columns:1fr;gap:26px;min-height:auto;padding:70px 24px}
   .pf-view{order:-1}
   .pf-stage{height:min(52vh,440px)}
+}
+</style>
+
+<style id="contest-print">
+@page{size:297mm 210mm;margin:0}
+@media print{
+  nav,#bar,.pf-ctrl{display:none!important}
+  #portfolio{padding:0!important}
+  .hero2{height:205mm!important;min-height:205mm!important;break-after:page;page-break-after:always}
+  .pf-panel{box-sizing:border-box;width:297mm!important;height:205mm!important;min-height:205mm!important;padding:14mm 16mm!important;break-inside:avoid;page-break-inside:avoid;break-after:auto;page-break-after:auto}
+  .pf-panel+.pf-panel{break-before:page;page-break-before:always}
+  .pf-stage{height:142mm!important}
+  #awards,#contact,footer{break-before:page;page-break-before:always}
+  #awards{padding:10mm 0!important}
+  #awards .shead{margin-bottom:4mm}
+  #awards .entry{break-inside:avoid;page-break-inside:avoid;margin-bottom:4mm}
+  #awards .ehead{padding:3mm 6mm 2mm;gap:12px}
+  #awards .eindex{font-size:28px}
+  #awards .etitle h3{font-size:15px;gap:6px}
+  #awards .etitle .desc{font-size:10px;line-height:1.35;margin-top:4px}
+  #awards .especs{min-width:95px;gap:3px}
+  #awards .chip{font-size:8px;padding:3px 5px}
+  #awards .ebody{padding:1mm 6mm 3mm;gap:10px}
+  #awards .feats li{padding:4px 0;font-size:10px;line-height:1.3;grid-template-columns:18px 1fr;gap:6px}
+  #awards .metarow{margin-top:5px;gap:4px}
+  #awards .tag{font-size:8px;padding:3px 5px}
+  #awards .awshots{gap:6px;margin-top:5px}
+  #awards .awshots .wshot{height:25mm!important;border:0;border-radius:0;box-shadow:none}
+  #awards .awshots .wshot img{height:100%!important;width:auto!important}
+  #awards .shots img{max-height:32mm!important;max-width:180px!important;border:0!important}
 }
 </style>
 
