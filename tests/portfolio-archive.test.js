@@ -62,9 +62,9 @@ test('the Work Index and runnable project links match the 15-project portfolio',
   assert.ok(romance, '연애 시뮬레이션 project exists');
   assert.ok(seoul, '서울 1147 project exists');
   assert.ok(bupum, '부품제작 project exists');
-  assert.match(romance, /href="https:\/\/openai-game-2026\.vercel\.app\/"[^>]*>Live Demo/);
-  assert.match(seoul, /href="https:\/\/seoul-1147\.vercel\.app\/"[^>]*>Live Demo/);
-  assert.match(bupum, /href="https:\/\/yunsulee2\.github\.io\/bupum-jejak\/"[^>]*>Live Demo/);
+  assert.match(romance, /href="https:\/\/openai-game-2026\.vercel\.app\/" target="_blank" rel="noopener noreferrer">Live Demo/);
+  assert.match(seoul, /href="https:\/\/seoul-1147\.vercel\.app\/" target="_blank" rel="noopener noreferrer">Live Demo/);
+  assert.match(bupum, /href="https:\/\/yunsulee2\.github\.io\/bupum-jejak\/" target="_blank" rel="noopener noreferrer">Live Demo/);
   assert.match(seoul, /href="https:\/\/github\.com\/yunsulee2\/seoul-1147"/);
   assert.match(bupum, /href="https:\/\/github\.com\/yunsulee2\/bupum-jejak"/);
   assert.match(romance, /chip live/);
@@ -168,6 +168,8 @@ test('the project overview adds premium hierarchy without hiding the full catalo
   assert.match(appJs, /project-card-open/);
   assert.match(appCss, /grid-template-rows:repeat\(4,minmax\(0,1fr\)\)/);
   assert.match(appCss, /\.project-card:nth-child\(-n\+5\)\{grid-row:span 2\}/);
+  assert.match(appCss, /\.project-card:not\(\.is-spotlight\) \.project-card-foot > span:first-child\{display:none\}/);
+  assert.match(appCss, /@media\(max-width:620px\)[\s\S]*?grid-template-columns:repeat\(3,minmax\(0,1fr\)\);grid-template-rows:repeat\(5,minmax\(0,1fr\)\)/);
   assert.match(appCss, /@media\(max-width:620px\)[\s\S]*?\.project-card:nth-child\(-n\+5\)\{grid-row:auto\}/);
 });
 
