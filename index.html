@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portfolio-app.css">
+<script src="portfolio-app.js" defer></script>
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
@@ -205,6 +207,76 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 </head>
 <body>
 <div id="bar"></div>
+
+<main id="portfolio-app" class="portfolio-app" aria-label="이윤수 포트폴리오">
+  <header class="portfolio-appbar">
+    <button class="app-brand" type="button" data-home aria-label="포트폴리오 홈으로 이동">
+      <span class="app-brand-mark">LY</span>
+      <span>이윤수</span>
+    </button>
+    <nav class="app-scene-nav" aria-label="메인 장면">
+      <button type="button" data-scene-target="intro" class="is-active"><span>01</span> 소개</button>
+      <button type="button" data-scene-target="projects"><span>02</span> 프로젝트</button>
+      <button type="button" data-scene-target="awards"><span>03</span> 수상</button>
+    </nav>
+    <div class="app-actions">
+      <button class="app-back" type="button" data-back hidden>← 전체 보기</button>
+      <a class="app-contact" href="mailto:10lys0404@naver.com">Contact</a>
+    </div>
+  </header>
+
+  <section id="portfolio-home" class="portfolio-home" aria-label="소개, 프로젝트 및 수상">
+    <article class="home-scene profile-scene" data-scene="intro" tabindex="-1">
+      <img src="assets/me.png" alt="이윤수" class="profile-scene-photo">
+      <div class="profile-scene-shade"></div>
+      <div class="profile-scene-copy">
+        <p class="scene-kicker">01 · Flutter Developer</p>
+        <h1>이윤수</h1>
+        <p>아이디어를 빠르게 실제 제품으로 구현하는 개발자입니다.</p>
+        <div class="profile-scene-meta" aria-label="포트폴리오 요약">
+          <span><b>15</b> Projects</span>
+          <span><b>5</b> Awards</span>
+          <span><b>2026</b> Portfolio</span>
+        </div>
+        <div class="profile-scene-links">
+          <a href="mailto:10lys0404@naver.com">Email ↗</a>
+          <a href="https://github.com/yunsulee2" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <button class="profile-scroll-cue" type="button" data-scene-jump="projects">
+        프로젝트 보기 <span aria-hidden="true">↓</span>
+      </button>
+    </article>
+
+    <article class="home-scene project-scene" data-scene="projects" tabindex="-1">
+      <header class="scene-heading">
+        <div>
+          <p class="scene-kicker">02 · Selected Work</p>
+          <h2>프로젝트</h2>
+        </div>
+        <p><b>15개</b>의 작업을 선택해 자세히 볼 수 있습니다.</p>
+      </header>
+      <div id="project-overview" class="project-overview-grid" aria-label="프로젝트 목록"></div>
+    </article>
+
+    <article class="home-scene award-scene" data-scene="awards" tabindex="-1">
+      <header class="scene-heading">
+        <div>
+          <p class="scene-kicker">03 · Recognition</p>
+          <h2>수상</h2>
+        </div>
+        <p><b>5개</b>의 성과를 한눈에 확인할 수 있습니다.</p>
+      </header>
+      <div id="award-overview" class="award-overview-grid" aria-label="수상 목록"></div>
+    </article>
+  </section>
+
+  <section id="portfolio-detail" class="portfolio-detail" aria-live="polite" hidden>
+    <div class="portfolio-detail-scroll">
+      <article id="portfolio-detail-content" class="portfolio-detail-content"></article>
+    </div>
+  </section>
+</main>
 
 <style>
 /* ===== HERO — split diagonal (Tomasz Gajda style) ===== */
@@ -1371,6 +1443,7 @@ document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',()=>{
 /* Rebuild Work into per-project panels with own image carousel (scroll = next project) */
 (function(){
   const work=document.getElementById('work');if(!work)return;
+  if(document.getElementById('portfolio-app'))return;
   const entries=[...work.querySelectorAll('.entry:not([data-portfolio-status="archived"])')];if(!entries.length)return;
   const showcase=document.querySelector('.showcase');
   const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
