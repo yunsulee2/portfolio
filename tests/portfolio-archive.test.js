@@ -6,7 +6,10 @@ const test = require('node:test');
 
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const appJs = fs.readFileSync(path.join(root, 'portfolio-app.js'), 'utf8');
+const appCss = fs.readFileSync(path.join(root, 'portfolio-app.css'), 'utf8');
 const work = html.split('<!-- WORK -->')[1].split('<!-- AWARDS -->')[0];
+const awards = html.split('<!-- AWARDS -->')[1].split('<!-- CONTACT -->')[0];
 
 function projectChunks() {
   return work
@@ -130,4 +133,51 @@ test('the generated project carousel keeps navigation, counters, and lightbox wi
   assert.ok(html.includes("set(ci+(+b.dataset.d))"));
   assert.ok(html.includes("curEl.textContent=String(ci+1).padStart(2,'0')"));
   assert.ok(html.includes("window.__lbOpenList(slides.map(s=>s.src),ci)"));
+});
+
+test('the portfolio home is reduced to exactly three overview scenes', () => {
+  assert.equal((html.match(/<article class="home-scene/g) || []).length, 3);
+  assert.match(html, /data-scene="intro"/);
+  assert.match(html, /data-scene="projects"/);
+  assert.match(html, /data-scene="awards"/);
+  assert.match(html, /id="project-overview"/);
+  assert.match(html, /id="award-overview"/);
+});
+
+test('the overview reuses all 15 projects and all 5 awards as clickable detail sources', () => {
+  assert.ok(appJs.includes("work.querySelectorAll('.entry:not([data-portfolio-status=\"archived\"])')"));
+  assert.ok(appJs.includes("awardsSource.querySelectorAll(':scope > .wrap > .entry')"));
+  assert.equal((awards.match(/<div class="entry rev">/g) || []).length, 5);
+  assert.ok(appJs.includes("button.dataset.open = `project:${project.id}`"));
+  assert.ok(appJs.includes("button.dataset.open = `award:${award.id}`"));
+});
+
+test('the award overview gives every placement a prominent result label', () => {
+  for (const result of ['종합 1위', '부문 1위', '우수상', '본선', 'TOP 8']) {
+    assert.ok(appJs.includes(`rank: '${result}'`), `${result} is surfaced`);
+  }
+
+  assert.match(appJs, /button\.dataset\.result = highlight\.rank/);
+  assert.match(appJs, /award-card-rank/);
+  assert.match(appCss, /grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/);
+  assert.match(appCss, /\.award-card:first-child\{[\s\S]*?grid-row:span 2/);
+});
+
+test('project and award details support explicit and browser back navigation', () => {
+  assert.match(html, /data-back[^>]*hidden/);
+  assert.ok(appJs.includes("history.pushState({ portfolioView: 'detail'"));
+  assert.ok(appJs.includes("addEventListener('popstate'"));
+  assert.ok(appJs.includes("location.hash.match(/^#(project|award)-(\\d{2})$/)"));
+  assert.ok(appJs.includes("if (event.key === 'Escape' && currentDetail)"));
+  assert.ok(appJs.includes("history.back()"));
+});
+
+test('the main experience presents three full-screen scenes in a vertical scroll flow', () => {
+  assert.match(appCss, /body\.portfolio-app-ready\{[\s\S]*?height:100dvh;[\s\S]*?overflow:hidden;/);
+  assert.match(appCss, /scroll-snap-type:y mandatory/);
+  assert.match(appCss, /\.home-scene\{[\s\S]*?height:100%;[\s\S]*?min-height:100%;/);
+  assert.match(appCss, /scroll-snap-align:start/);
+  assert.match(appJs, /home\.scrollTo\(\{[\s\S]*?top: scene\.offsetTop/);
+  assert.doesNotMatch(appCss, /scroll-snap-type:x mandatory/);
+  assert.match(appCss, /\.detail-stage img\.is-active\{opacity:1;pointer-events:auto;z-index:1\}/);
 });
