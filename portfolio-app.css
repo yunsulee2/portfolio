@@ -357,28 +357,48 @@ body.portfolio-app-ready .portfolio-app{
   min-height:0;
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
-  grid-template-rows:repeat(3,minmax(0,1fr));
+  grid-template-rows:repeat(4,minmax(0,1fr));
   gap:clamp(8px,1vw,14px);
 }
 
 .project-card{
   position:relative;
+  grid-row:span 1;
   min-width:0;
   min-height:0;
   overflow:hidden;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
   background:#0b0d13;
+  box-shadow:0 10px 30px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.035);
   cursor:pointer;
   text-align:left;
   isolation:isolate;
+  transform:translateZ(0);
+  transition:transform .28s cubic-bezier(.2,.75,.25,1),border-color .28s,box-shadow .28s;
+}
+
+.project-card:nth-child(-n+5){grid-row:span 2}
+
+.project-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  border-top:1px solid color-mix(in srgb,var(--project-accent) 74%,transparent);
+  background:radial-gradient(420px 180px at 16% 110%,color-mix(in srgb,var(--project-accent) 20%,transparent),transparent 58%);
+  opacity:.74;
+  pointer-events:none;
+  transition:opacity .28s;
 }
 
 .project-card::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,transparent 28%,rgba(6,7,10,.92));
+  background:
+    linear-gradient(180deg,rgba(5,6,10,.08) 18%,rgba(5,6,10,.34) 52%,rgba(5,6,10,.96) 100%),
+    linear-gradient(90deg,rgba(5,6,10,.18),transparent 58%);
   z-index:1;
 }
 
@@ -387,40 +407,133 @@ body.portfolio-app-ready .portfolio-app{
   height:100%;
   object-fit:cover;
   object-position:top center;
-  filter:saturate(.8) brightness(.82);
-  transition:transform .3s,filter .3s;
+  filter:saturate(.86) brightness(.8) contrast(1.03);
+  transition:transform .55s cubic-bezier(.2,.75,.25,1),filter .35s;
 }
 
+.project-card:hover,
+.project-card:focus-visible{
+  z-index:3;
+  transform:translateY(-4px);
+  border-color:color-mix(in srgb,var(--project-accent) 68%,white 8%);
+  box-shadow:0 22px 52px rgba(0,0,0,.34),0 0 0 1px color-mix(in srgb,var(--project-accent) 24%,transparent);
+  outline:none;
+}
+
+.project-card:hover::before,
+.project-card:focus-visible::before{opacity:1}
+
 .project-card:hover img,
-.project-card:focus-visible img{transform:scale(1.06);filter:saturate(1) brightness(1)}
+.project-card:focus-visible img{transform:scale(1.075);filter:saturate(1.08) brightness(.96) contrast(1.03)}
 
 .project-card-copy{
   position:absolute;
-  left:12px;
-  right:12px;
-  bottom:10px;
-  z-index:2;
+  inset:0;
+  z-index:3;
   display:flex;
-  align-items:flex-end;
-  gap:6px;
+  flex-direction:column;
+  padding:clamp(9px,1vw,14px);
+  color:#fff;
+  pointer-events:none;
+}
+
+.project-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
 }
 
 .project-card-index{
-  flex:0 0 auto;
+  min-width:25px;
+  height:22px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;
+  background:rgba(5,6,10,.42);
+  backdrop-filter:blur(10px);
   font-family:var(--mono);
-  font-size:9px;
-  color:var(--app-accent);
+  font-size:8px;
+  color:#fff;
+}
+
+.project-card-status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  color:rgba(255,255,255,.72);
+  font-family:var(--mono);
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.project-card.has-live .project-card-status{color:#8ff0c0}
+
+.project-card-status i{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#58dfa7;
+  box-shadow:0 0 0 4px rgba(88,223,167,.12),0 0 14px rgba(88,223,167,.7);
+}
+
+.project-card-main{
+  margin-top:auto;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
 }
 
 .project-card-title{
+  display:block;
   overflow:hidden;
   color:#fff;
-  font-size:12px;
-  font-weight:730;
-  line-height:1.18;
+  font-size:clamp(10px,1vw,13px);
+  font-weight:760;
+  line-height:1.16;
   text-overflow:ellipsis;
   white-space:nowrap;
+  text-shadow:0 2px 16px rgba(0,0,0,.48);
 }
+
+.project-card.is-spotlight .project-card-title{font-size:clamp(16px,1.55vw,22px);letter-spacing:-.025em}
+
+.project-card-subtitle{
+  overflow:hidden;
+  color:rgba(255,255,255,.68);
+  font-family:var(--mono);
+  font-size:7px;
+  letter-spacing:.055em;
+  text-overflow:ellipsis;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.project-card:not(.is-spotlight) .project-card-subtitle{display:none}
+
+.project-card-foot{
+  margin-top:8px;
+  padding-top:8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  border-top:1px solid rgba(255,255,255,.13);
+  color:rgba(255,255,255,.58);
+  font-family:var(--mono);
+  font-size:7px;
+  letter-spacing:.035em;
+}
+
+.project-card:not(.is-spotlight) .project-card-foot > span:first-child{display:none}
+
+.project-card-open{margin-left:auto;color:rgba(255,255,255,.82);text-transform:uppercase}
+.project-card-open i{display:inline-block;margin-left:3px;color:var(--project-accent);font-style:normal;transition:transform .25s}
+.project-card:hover .project-card-open i,.project-card:focus-visible .project-card-open i{transform:translate(2px,-2px)}
 
 .award-overview-grid{
   flex:1;
@@ -850,7 +963,7 @@ body.portfolio-app-ready .portfolio-app{
   .profile-scene-photo{right:-2vw;width:min(62vw,660px)}
   .profile-scene-copy{left:clamp(32px,6vw,72px);width:min(48vw,520px)}
   .profile-scene-copy h1{font-size:clamp(62px,10vw,100px)}
-  .project-overview-grid{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+  .project-overview-grid{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
   .award-overview-grid{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
   .portfolio-detail-content{grid-template-columns:1fr;padding:32px 24px 56px;gap:26px;align-items:start}
   .detail-media{order:-1}
@@ -882,8 +995,14 @@ body.portfolio-app-ready .portfolio-app{
   .scene-heading h2{font-size:30px}
   .scene-heading > p{max-width:12em;font-size:9px}
   .project-overview-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));gap:6px}
-  .project-card-copy{left:6px;right:6px;bottom:6px}
-  .project-card-title{font-size:9px}
+  .project-card:nth-child(-n+5){grid-row:auto}
+  .project-card{border-radius:12px}
+  .project-card-copy{padding:7px}
+  .project-card-index{min-width:21px;height:18px;font-size:7px}
+  .project-card-status{font-size:6px}
+  .project-card-main{gap:0}
+  .project-card-title,.project-card.is-spotlight .project-card-title{font-size:9px;letter-spacing:-.01em}
+  .project-card-subtitle,.project-card-foot{display:none}
   .award-overview-grid{grid-template-columns:1fr;grid-template-rows:repeat(5,minmax(0,1fr));gap:7px}
   .award-card,
   .award-card:first-child{
@@ -938,7 +1057,7 @@ body.portfolio-app-ready .portfolio-app{
 }
 
 @media(prefers-reduced-motion:reduce){
-  .project-card img,.detail-stage img,.award-card{transition:none!important}
+  .project-card,.project-card img,.project-card-open i,.detail-stage img,.award-card{transition:none!important}
   .profile-scroll-cue span{animation:none!important}
   .portfolio-home{scroll-behavior:auto!important}
 }

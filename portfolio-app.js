@@ -59,12 +59,19 @@
   let currentSlide = 0;
   let lastTrigger = null;
 
-  const createProjectCard = (project) => {
+  const projectAccents = ['#ff8d74', '#88a9ff', '#77dfb0', '#d69cff', '#f6cd67'];
+
+  const createProjectCard = (project, projectIndex) => {
+    const liveLink = project.links.find((link) => /live demo/i.test(link.label));
+    const isSpotlight = projectIndex < 5;
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'project-card';
+    button.classList.toggle('is-spotlight', isSpotlight);
+    button.classList.toggle('has-live', Boolean(liveLink));
     button.dataset.open = `project:${project.id}`;
     button.setAttribute('aria-label', `${project.id}. ${project.title} 프로젝트 자세히 보기`);
+    button.style.setProperty('--project-accent', projectAccents[projectIndex % projectAccents.length]);
 
     const image = document.createElement('img');
     image.src = project.images[0]?.src || 'assets/me.png';
@@ -73,7 +80,20 @@
 
     const copy = document.createElement('span');
     copy.className = 'project-card-copy';
-    copy.innerHTML = `<span class="project-card-index">${escapeHtml(project.id)}</span><span class="project-card-title">${escapeHtml(project.title)}</span>`;
+    const technology = project.tags.slice(0, 2).join(' · ') || project.subtitle || 'Project';
+    copy.innerHTML = `
+      <span class="project-card-top">
+        <span class="project-card-index">${escapeHtml(project.id)}</span>
+        <span class="project-card-status">${liveLink ? '<i aria-hidden="true"></i> Live' : isSpotlight ? 'Selected' : 'Project'}</span>
+      </span>
+      <span class="project-card-main">
+        <strong class="project-card-title">${escapeHtml(project.title)}</strong>
+        ${project.subtitle ? `<span class="project-card-subtitle">${escapeHtml(project.subtitle)}</span>` : ''}
+      </span>
+      <span class="project-card-foot">
+        <span>${escapeHtml(technology)}</span>
+        <span class="project-card-open">View <i aria-hidden="true">↗</i></span>
+      </span>`;
 
     button.append(image, copy);
     return button;
