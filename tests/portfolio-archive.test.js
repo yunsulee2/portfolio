@@ -52,16 +52,24 @@ test('archived projects remain stored while only 15 projects are visible', () =>
   );
 });
 
-test('the Work Index and new project links match the 15-project portfolio', () => {
+test('the Work Index and runnable project links match the 15-project portfolio', () => {
   assert.match(work, /<span class="kr">15 Projects<\/span>/);
 
+  const romance = projectChunks().find((chunk) => chunk.includes('<h3>연애 시뮬레이션'));
   const seoul = projectChunks().find((chunk) => chunk.includes('<h3>서울 1147'));
   const bupum = projectChunks().find((chunk) => chunk.includes('<h3>부품제작'));
 
+  assert.ok(romance, '연애 시뮬레이션 project exists');
   assert.ok(seoul, '서울 1147 project exists');
   assert.ok(bupum, '부품제작 project exists');
+  assert.match(romance, /href="https:\/\/openai-game-2026\.vercel\.app\/"[^>]*>Live Demo/);
+  assert.match(seoul, /href="https:\/\/seoul-1147\.vercel\.app\/"[^>]*>Live Demo/);
+  assert.match(bupum, /href="https:\/\/yunsulee2\.github\.io\/bupum-jejak\/"[^>]*>Live Demo/);
   assert.match(seoul, /href="https:\/\/github\.com\/yunsulee2\/seoul-1147"/);
   assert.match(bupum, /href="https:\/\/github\.com\/yunsulee2\/bupum-jejak"/);
+  assert.match(romance, /chip live/);
+  assert.match(seoul, /chip live/);
+  assert.match(bupum, /chip live/);
 });
 
 test('the five requested projects expose complete, distinct screenshot sets', () => {
@@ -150,6 +158,17 @@ test('the overview reuses all 15 projects and all 5 awards as clickable detail s
   assert.equal((awards.match(/<div class="entry rev">/g) || []).length, 5);
   assert.ok(appJs.includes("button.dataset.open = `project:${project.id}`"));
   assert.ok(appJs.includes("button.dataset.open = `award:${award.id}`"));
+});
+
+test('the project overview adds premium hierarchy without hiding the full catalog', () => {
+  assert.match(appJs, /const isSpotlight = projectIndex < 5/);
+  assert.match(appJs, /button\.classList\.toggle\('has-live', Boolean\(liveLink\)\)/);
+  assert.match(appJs, /project-card-status/);
+  assert.match(appJs, /project-card-subtitle/);
+  assert.match(appJs, /project-card-open/);
+  assert.match(appCss, /grid-template-rows:repeat\(4,minmax\(0,1fr\)\)/);
+  assert.match(appCss, /\.project-card:nth-child\(-n\+5\)\{grid-row:span 2\}/);
+  assert.match(appCss, /@media\(max-width:620px\)[\s\S]*?\.project-card:nth-child\(-n\+5\)\{grid-row:auto\}/);
 });
 
 test('the award overview gives every placement a prominent result label', () => {
