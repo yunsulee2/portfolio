@@ -176,6 +176,21 @@ test('the generated project carousel keeps navigation, counters, and lightbox wi
   assert.ok(html.includes("window.__lbOpenList(slides.map(s=>s.src),ci)"));
 });
 
+test('Mukbang Yogi includes a browser-compatible mixed-media demo slide', () => {
+  const mukbang = projectChunks().find((chunk) => chunk.includes('<h3>먹방요기'));
+  const videoSource = 'assets/projects/mukbang/demo.mp4';
+  const posterSource = 'assets/projects/mukbang/demo-poster.jpg';
+
+  assert.ok(mukbang.includes(`src="${videoSource}"`));
+  assert.ok(mukbang.includes(`poster="${posterSource}"`));
+  assert.match(mukbang, /<video[^>]*controls[^>]*playsinline[^>]*preload="metadata"/);
+  assert.ok(fs.existsSync(path.join(root, videoSource)));
+  assert.ok(fs.existsSync(path.join(root, posterSource)));
+  assert.match(appJs, /querySelectorAll\('\.ebody img, \.ebody video'\)/);
+  assert.match(appJs, /data-detail-media/);
+  assert.match(appCss, /\.detail-stage video\.is-active/);
+});
+
 test('the portfolio home is reduced to exactly three overview scenes', () => {
   assert.equal((html.match(/<article class="home-scene/g) || []).length, 3);
   assert.match(html, /data-scene="intro"/);
@@ -258,5 +273,5 @@ test('the main experience presents three full-screen scenes in a vertical scroll
   assert.match(appCss, /scroll-snap-align:start/);
   assert.match(appJs, /home\.scrollTo\(\{[\s\S]*?top: scene\.offsetTop/);
   assert.doesNotMatch(appCss, /scroll-snap-type:x mandatory/);
-  assert.match(appCss, /\.detail-stage img\.is-active\{opacity:1;pointer-events:auto;z-index:1\}/);
+  assert.match(appCss, /\.detail-stage img\.is-active,[\s\S]*?\.detail-stage video\.is-active\{opacity:1;pointer-events:auto;z-index:1\}/);
 });

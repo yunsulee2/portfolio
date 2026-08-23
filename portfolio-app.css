@@ -881,7 +881,8 @@ body.portfolio-app-ready .portfolio-app{
   background:#0c0e14;
 }
 
-.detail-stage img{
+.detail-stage img,
+.detail-stage video{
   position:absolute;
   inset:0;
   width:100%;
@@ -890,10 +891,16 @@ body.portfolio-app-ready .portfolio-app{
   opacity:0;
   pointer-events:none;
   transition:opacity .35s ease;
+}
+
+.detail-stage img{
   cursor:zoom-in;
 }
 
-.detail-stage img.is-active{opacity:1;pointer-events:auto;z-index:1}
+.detail-stage video{background:#000}
+
+.detail-stage img.is-active,
+.detail-stage video.is-active{opacity:1;pointer-events:auto;z-index:1}
 
 .detail-controls{display:flex;align-items:center;gap:10px;margin-top:15px}
 
@@ -1057,7 +1064,7 @@ body.portfolio-app-ready .portfolio-app{
 }
 
 @media(prefers-reduced-motion:reduce){
-  .project-card,.project-card img,.project-card-open i,.detail-stage img,.award-card{transition:none!important}
+  .project-card,.project-card img,.project-card-open i,.detail-stage img,.detail-stage video,.award-card{transition:none!important}
   .profile-scroll-cue span{animation:none!important}
   .portfolio-home{scroll-behavior:auto!important}
 }
