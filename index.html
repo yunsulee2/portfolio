@@ -127,7 +127,8 @@ section{padding:104px 0;border-top:1px solid var(--line)}
 .shots>img:only-child{grid-column:1/-1;justify-self:center;max-width:360px;width:100%;height:auto}
 .shot{cursor:zoom-in;border:1px solid var(--line);background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s,border-color .3s}
 .shot:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--line2)}
-.shot img{width:100%;height:auto}
+.shot img,.shot video{display:block;width:100%;height:auto}
+.video-shot{cursor:default;background:#000}
 .research{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
 .research img{width:100%;cursor:zoom-in}
 .research .cap{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);padding:10px 13px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}
@@ -477,6 +478,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
         <div class="shot"><img src="assets/projects/mukbang/1.png" alt="먹방요기 요기요 홈"></div>
         <div class="shot"><img src="assets/projects/mukbang/2.png" alt="먹방요기 서비스 안내"></div>
         <div class="shot"><img src="assets/projects/mukbang/3.png" alt="먹방 조합 취향 설정"></div>
+        <div class="shot video-shot"><video src="assets/projects/mukbang/demo.mp4" poster="assets/projects/mukbang/demo-poster.jpg" aria-label="먹방 릴스 공유부터 주문과 결제까지 보여주는 먹방요기 앱 시연 영상" controls playsinline preload="metadata"></video></div>
       </div>
     </div>
    </div>

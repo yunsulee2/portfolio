@@ -39,12 +39,25 @@
       href: link.getAttribute('href') || '#',
       label: text(link).replace(/↗/g, '').trim(),
     }));
-    const images = [...entry.querySelectorAll('.ebody img')].map((image) => ({
-      src: image.getAttribute('src') || '',
-      alt: image.getAttribute('alt') || `${title} 화면`,
-    })).filter((image) => image.src);
+    const media = [...entry.querySelectorAll('.ebody img, .ebody video')].map((element) => {
+      const src = element.getAttribute('src') || '';
+      if (element.matches('video')) {
+        return {
+          type: 'video',
+          src,
+          poster: element.getAttribute('poster') || '',
+          label: element.getAttribute('aria-label') || `${title} 시연 영상`,
+        };
+      }
+      return {
+        type: 'image',
+        src,
+        alt: element.getAttribute('alt') || `${title} 화면`,
+      };
+    }).filter((item) => item.src);
+    const images = media.filter((item) => item.type === 'image');
 
-    return { type, id, title, subtitle, description, features, tags, chips, links, images };
+    return { type, id, title, subtitle, description, features, tags, chips, links, images, media };
   };
 
   const projects = [...work.querySelectorAll('.entry:not([data-portfolio-status="archived"])')]
@@ -174,7 +187,7 @@
   };
 
   const mediaMarkup = (item) => {
-    if (!item.images.length) {
+    if (!item.media.length) {
       return `
         <div class="detail-award-poster" aria-label="${escapeHtml(item.title)} 수상 요약">
           <span>${escapeHtml(item.id)} · Recognition</span>
@@ -183,14 +196,25 @@
         </div>`;
     }
 
-    const slides = item.images.map((image, index) => `
-      <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt)}" class="${index === 0 ? 'is-active' : ''}" loading="${index === 0 ? 'eager' : 'lazy'}" data-detail-image="${index}">`).join('');
-    const controls = item.images.length > 1 ? `
+    let imageIndex = 0;
+    const slides = item.media.map((mediaItem, index) => {
+      const activeClass = index === 0 ? 'is-active' : '';
+      if (mediaItem.type === 'video') {
+        const poster = mediaItem.poster ? ` poster="${escapeHtml(mediaItem.poster)}"` : '';
+        return `
+          <video src="${escapeHtml(mediaItem.src)}"${poster} aria-label="${escapeHtml(mediaItem.label)}" class="${activeClass}" controls playsinline preload="metadata" data-detail-media="${index}"></video>`;
+      }
+      const currentImageIndex = imageIndex;
+      imageIndex += 1;
+      return `
+        <img src="${escapeHtml(mediaItem.src)}" alt="${escapeHtml(mediaItem.alt)}" class="${activeClass}" loading="${index === 0 ? 'eager' : 'lazy'}" data-detail-media="${index}" data-detail-image="${currentImageIndex}">`;
+    }).join('');
+    const controls = item.media.length > 1 ? `
       <div class="detail-controls">
         <button type="button" class="detail-arrow" data-slide-step="-1" aria-label="이전 이미지">‹</button>
         <button type="button" class="detail-arrow" data-slide-step="1" aria-label="다음 이미지">›</button>
-        <div class="detail-dots">${item.images.map((_, index) => `<button type="button" class="detail-dot ${index === 0 ? 'is-active' : ''}" data-slide-index="${index}" aria-label="${index + 1}번 이미지"></button>`).join('')}</div>
-        <div class="detail-count"><b>01</b> / ${String(item.images.length).padStart(2, '0')}</div>
+        <div class="detail-dots">${item.media.map((_, index) => `<button type="button" class="detail-dot ${index === 0 ? 'is-active' : ''}" data-slide-index="${index}" aria-label="${index + 1}번 미디어"></button>`).join('')}</div>
+        <div class="detail-count"><b>01</b> / ${String(item.media.length).padStart(2, '0')}</div>
       </div>` : '';
 
     return `<div class="detail-stage">${slides}</div>${controls}`;
@@ -221,9 +245,13 @@
   };
 
   const updateSlide = (next) => {
-    if (!currentDetail?.images.length) return;
-    currentSlide = (next + currentDetail.images.length) % currentDetail.images.length;
-    detailContent.querySelectorAll('[data-detail-image]').forEach((image, index) => image.classList.toggle('is-active', index === currentSlide));
+    if (!currentDetail?.media.length) return;
+    currentSlide = (next + currentDetail.media.length) % currentDetail.media.length;
+    detailContent.querySelectorAll('[data-detail-media]').forEach((mediaElement, index) => {
+      const isActive = index === currentSlide;
+      mediaElement.classList.toggle('is-active', isActive);
+      if (!isActive && mediaElement.tagName === 'VIDEO') mediaElement.pause();
+    });
     detailContent.querySelectorAll('[data-slide-index]').forEach((dot, index) => dot.classList.toggle('is-active', index === currentSlide));
     const count = detailContent.querySelector('.detail-count b');
     if (count) count.textContent = String(currentSlide + 1).padStart(2, '0');
@@ -258,6 +286,7 @@
 
   const showHome = ({ historyMode = null, restoreFocus = true } = {}) => {
     closeLightbox();
+    detailContent.querySelectorAll('video').forEach((video) => video.pause());
     currentDetail = null;
     currentSlide = 0;
     app.classList.remove('is-detail');
@@ -347,7 +376,7 @@
       return;
     }
 
-    const image = event.target.closest('[data-detail-image]');
+    const image = event.target.closest('img[data-detail-image]');
     if (image && currentDetail?.images.length && window.__lbOpenList) {
       window.__lbOpenList(currentDetail.images.map((item) => item.src), Number(image.dataset.detailImage));
     }
@@ -364,9 +393,9 @@
     if (event.key === 'Escape' && currentDetail) {
       event.preventDefault();
       goBack();
-    } else if (currentDetail?.images.length > 1 && event.key === 'ArrowLeft') {
+    } else if (currentDetail?.media.length > 1 && event.key === 'ArrowLeft') {
       updateSlide(currentSlide - 1);
-    } else if (currentDetail?.images.length > 1 && event.key === 'ArrowRight') {
+    } else if (currentDetail?.media.length > 1 && event.key === 'ArrowRight') {
       updateSlide(currentSlide + 1);
     }
   }, true);
