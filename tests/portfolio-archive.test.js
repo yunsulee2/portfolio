@@ -224,6 +224,8 @@ test('the award overview gives every placement a prominent result label', () => 
 
   assert.match(appJs, /button\.dataset\.result = highlight\.rank/);
   assert.match(appJs, /award-card-rank/);
+  assert.match(appJs, /'02': \{[^}]*photo: true/);
+  assert.match(appJs, /\(highlight\.featured \|\| highlight\.photo\) && award\.images\[0\]/);
   assert.match(appCss, /grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/);
   assert.match(appCss, /\.award-card:first-child\{[\s\S]*?grid-row:span 2/);
 });
