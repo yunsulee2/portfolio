@@ -193,6 +193,17 @@ test('the overview reuses all 15 projects and all 5 awards as clickable detail s
   assert.ok(appJs.includes("button.dataset.open = `award:${award.id}`"));
 });
 
+test('the AX talent war award includes the supplied hackathon photo', () => {
+  const axAward = awards.split('<!-- 02 2026 AX 인재전쟁 해커톤 본선 -->')[1]
+    .split('<!-- 03 2026 교내 해커톤 우수상 -->')[0];
+  const source = 'assets/projects/ax-talent-war/1.jpg';
+  const alt = '2026 AX 인재전쟁 해커톤 현장에서 인터뷰하는 이윤수';
+
+  assert.ok(axAward.includes(`src="${source}"`));
+  assert.ok(axAward.includes(`alt="${alt}"`));
+  assert.ok(fs.existsSync(path.join(root, source)));
+});
+
 test('the project overview adds premium hierarchy without hiding the full catalog', () => {
   assert.match(appJs, /const isSpotlight = projectIndex < 5/);
   assert.match(appJs, /button\.classList\.toggle\('has-live', Boolean\(liveLink\)\)/);
