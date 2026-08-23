@@ -114,7 +114,12 @@
         ],
       },
       '02': { rank: '부문 1위', proof: '5,300명 지원 · 최종 6인', status: 'CATEGORY WINNER', winner: true, photo: true },
-      '03': { rank: '우수상', proof: '출시 1주일 · 사용자 100명', status: 'EXCELLENCE' },
+      '03': {
+        rank: '우수상',
+        proof: '출시 1주일 · 사용자 100명',
+        status: 'EXCELLENCE',
+        overviewImage: 'assets/projects/school-hackathon/card.jpg',
+      },
       '04': { rank: '본선', proof: 'Track B · AI 솔루션', status: 'FINALIST' },
       '05': { rank: 'TOP 8', proof: '본선 8팀 선정', status: 'FINALIST' },
     };
@@ -135,8 +140,10 @@
       ? `<span class="award-card-metrics">${highlight.metrics.map((metric) => `
           <span><b>${escapeHtml(metric.value)}</b><small>${escapeHtml(metric.label)}</small></span>`).join('')}</span>`
       : '';
-    const cardImage = (highlight.featured || highlight.photo) && award.images[0]
-      ? `<img class="award-card-photo" src="${escapeHtml(award.images[0].src)}" alt="" loading="lazy">`
+    const cardImageSource = highlight.overviewImage
+      || ((highlight.featured || highlight.photo) ? award.images[0]?.src : '');
+    const cardImage = cardImageSource
+      ? `<img class="award-card-photo" src="${escapeHtml(cardImageSource)}" alt="" loading="lazy">`
       : '';
     button.innerHTML = `
       ${cardImage}

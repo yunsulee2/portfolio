@@ -204,6 +204,17 @@ test('the AX talent war award includes the supplied hackathon photo', () => {
   assert.ok(fs.existsSync(path.join(root, source)));
 });
 
+test('the school hackathon uses the supplied photo only on its overview card', () => {
+  const schoolAward = awards.split('<!-- 03 2026 교내 해커톤 우수상 -->')[1]
+    .split('<!-- 04 K-AI Contents Award 본선 -->')[0];
+  const overviewSource = 'assets/projects/school-hackathon/card.jpg';
+
+  assert.ok(appJs.includes(`overviewImage: '${overviewSource}'`));
+  assert.ok(fs.existsSync(path.join(root, overviewSource)));
+  assert.ok(schoolAward.includes('src="assets/hackathon-2026.jpg"'));
+  assert.ok(!schoolAward.includes(overviewSource));
+});
+
 test('the project overview adds premium hierarchy without hiding the full catalog', () => {
   assert.match(appJs, /const isSpotlight = projectIndex < 5/);
   assert.match(appJs, /button\.classList\.toggle\('has-live', Boolean\(liveLink\)\)/);
@@ -225,7 +236,8 @@ test('the award overview gives every placement a prominent result label', () => 
   assert.match(appJs, /button\.dataset\.result = highlight\.rank/);
   assert.match(appJs, /award-card-rank/);
   assert.match(appJs, /'02': \{[^}]*photo: true/);
-  assert.match(appJs, /\(highlight\.featured \|\| highlight\.photo\) && award\.images\[0\]/);
+  assert.match(appJs, /const cardImageSource = highlight\.overviewImage/);
+  assert.match(appJs, /\(highlight\.featured \|\| highlight\.photo\) \? award\.images\[0\]\?\.src/);
   assert.match(appCss, /grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/);
   assert.match(appCss, /\.award-card:first-child\{[\s\S]*?grid-row:span 2/);
 });
