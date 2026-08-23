@@ -100,7 +100,7 @@ test('requested screenshots stay in the intended card and order with accessible 
     '서울어린이대공원 통합관제': ['seoul-cctv/1.jpg', 'seoul-cctv/2.png', 'seoul-cctv/3.png'],
     '연애 시뮬레이션': ['romance-simulation/1.png', 'romance-simulation/2.png', 'romance-simulation/3.png', 'romance-simulation/4.png'],
     'MODAL SHIFT 2.0': ['dosim-mulyu-hub/1.png', 'dosim-mulyu-hub/2.png', 'dosim-mulyu-hub/3.png', 'dosim-mulyu-hub/4.png'],
-    '서울 1147': ['seoul-1147/1.png', 'seoul-1147/2.png', 'seoul-1147/3.png', 'seoul-1147/4.png', 'seoul-1147/5.png', 'seoul-1147/6.png'],
+    '서울 1147': ['seoul-1147/1.png', 'seoul-1147/2.png', 'seoul-1147/3.png', 'seoul-1147/4.png', 'seoul-1147/5.png', 'seoul-1147/6.png', 'seoul-1147/7.png'],
     '부품제작': ['bupum-jejak/1.png', 'bupum-jejak/2.png', 'bupum-jejak/3.png', 'bupum-jejak/4.png'],
   };
 
@@ -124,7 +124,7 @@ test('new PNG screenshots retain the portfolio capture resolution', () => {
     ...['2.png', '3.png'].map((file) => `seoul-cctv/${file}`),
     ...['2.png', '3.png', '4.png'].map((file) => `romance-simulation/${file}`),
     ...['2.png', '3.png', '4.png'].map((file) => `dosim-mulyu-hub/${file}`),
-    ...['1.png', '2.png', '3.png', '4.png', '5.png', '6.png'].map((file) => `seoul-1147/${file}`),
+    ...['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png'].map((file) => `seoul-1147/${file}`),
     ...['1.png', '2.png', '3.png', '4.png'].map((file) => `bupum-jejak/${file}`),
   ];
 
@@ -135,17 +135,19 @@ test('new PNG screenshots retain the portfolio capture resolution', () => {
   }
 });
 
-test('Seoul 1147 uses the approved e8369fc screenshot refresh', () => {
+test('Seoul 1147 uses the approved screenshot set with a Gwanghwamun lead image', () => {
   const seoul = projectChunks().find((chunk) => chunk.includes('<h3>서울 1147'));
   const approvedHashes = {
-    '1.png': '35d6faefa821628b9099ff6a60201444ade70a5edeaee259696840ccc053a99f',
-    '2.png': '6d45694c648c447b1f7b5ba7f06f10da1a64c435a3918278372bced7b51c8a44',
-    '3.png': 'c3f72cd2c3e3ac537e2dd30f401a72af082d79ad92e28b7f04d46ae2de1a3efe',
-    '4.png': '7fdb767b077754bc09072830fff20d95366d670e454a73f4bc89f05079c85754',
-    '5.png': '91cfde4b2489d5828e33c5004b70f2d1aeb4405a2fa30babcc1798b9fe1a84c4',
-    '6.png': '0b7c53248d033f74134d7fc67e99cf26fc2934e5332dcb7c93a3b1ae3d2f2e93',
+    '1.png': 'd7aa3e51a392c7f0d437615016b7572f938e20cc28714a5f5b127c170604964c',
+    '2.png': '35d6faefa821628b9099ff6a60201444ade70a5edeaee259696840ccc053a99f',
+    '3.png': '6d45694c648c447b1f7b5ba7f06f10da1a64c435a3918278372bced7b51c8a44',
+    '4.png': 'c3f72cd2c3e3ac537e2dd30f401a72af082d79ad92e28b7f04d46ae2de1a3efe',
+    '5.png': '7fdb767b077754bc09072830fff20d95366d670e454a73f4bc89f05079c85754',
+    '6.png': '91cfde4b2489d5828e33c5004b70f2d1aeb4405a2fa30babcc1798b9fe1a84c4',
+    '7.png': '0b7c53248d033f74134d7fc67e99cf26fc2934e5332dcb7c93a3b1ae3d2f2e93',
   };
   const approvedAltText = [
+    '광화문과 세종대왕상을 담은 서울 1147의 3D 야경 대표 화면',
     'BTS 다이너마이트 빌보드와 라이브 가수가 있는 서울 1147 K-팝 무대',
     'BTS 다이너마이트 음악과 함께 진행하는 K-팝 버스킹 리듬 게임',
     '자신감 포즈를 선택한 서울 셀프 포토 스튜디오 화면',
