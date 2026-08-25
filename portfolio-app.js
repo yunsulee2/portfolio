@@ -135,11 +135,17 @@
       },
       '04': { rank: '본선', proof: 'Track B · AI 솔루션', status: 'FINALIST' },
       '05': {
-        rank: 'TOP 8',
-        proof: '186팀 중 본선 8팀',
-        status: 'FINALIST',
+        rank: '최종 1위',
+        proof: '최우수상 · 상금 200만원',
+        status: 'GRAND WINNER',
+        winner: true,
         photo: true,
-        photoPosition: 'center 72%',
+        photoPosition: 'center 62%',
+        metrics: [
+          { value: '186팀', label: '참가 규모' },
+          { value: '8팀', label: '본선 진출' },
+          { value: '1위', label: '최종 순위' },
+        ],
       },
     };
     const highlight = highlights[award.id] || {
@@ -152,6 +158,7 @@
     button.className = 'award-card';
     if (highlight.featured) button.classList.add('is-featured');
     if (highlight.winner) button.classList.add('is-winner');
+    if (highlight.metrics?.length) button.classList.add('has-metrics');
     if (highlight.photoPosition) button.style.setProperty('--award-photo-position', highlight.photoPosition);
     button.dataset.open = `award:${award.id}`;
     button.dataset.result = highlight.rank;
@@ -190,7 +197,7 @@
     const projectCount = app.querySelector('.project-scene .scene-heading > p');
     const awardCount = app.querySelector('.award-scene .scene-heading > p');
     if (projectCount) projectCount.innerHTML = `<b>${projects.length}개</b>의 작업을 선택해 자세히 볼 수 있습니다.`;
-    if (awardCount) awardCount.innerHTML = `<b>종합·부문 1위 2회</b>를 포함한 ${awards.length}개의 성과입니다.`;
+    if (awardCount) awardCount.innerHTML = `<b>종합·부문 1위 3회</b>를 포함한 ${awards.length}개의 성과입니다.`;
   };
 
   const mediaMarkup = (item) => {

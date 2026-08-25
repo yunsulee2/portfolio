@@ -570,6 +570,12 @@ body.portfolio-app-ready .portfolio-app{
     linear-gradient(145deg,rgba(247,215,121,.12),rgba(255,255,255,.025) 58%);
 }
 
+.award-card.is-winner{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(247,215,121,.18),transparent 30%),
+    linear-gradient(145deg,rgba(247,215,121,.1),rgba(255,255,255,.025) 62%);
+}
+
 .award-card::before{
   content:"";
   position:absolute;
@@ -657,6 +663,24 @@ body.portfolio-app-ready .portfolio-app{
 }
 
 .award-card.is-winner .award-card-rank{color:#f7d779}
+
+.award-card.is-winner::after{color:rgba(247,215,121,.06)}
+
+.award-card.has-metrics:not(.is-featured){
+  padding:clamp(14px,1.35vw,21px);
+  gap:6px;
+}
+
+.award-card.has-metrics:not(.is-featured) .award-card-rank{
+  font-size:clamp(36px,3.2vw,52px);
+}
+
+.award-card.has-metrics:not(.is-featured) .award-card-content,
+.award-card.has-metrics:not(.is-featured) .award-card-copy{gap:6px}
+
+.award-card.has-metrics:not(.is-featured) .award-card-metrics > span{padding:10px 8px}
+.award-card.has-metrics:not(.is-featured) .award-card-proof{padding:6px 8px}
+.award-card.has-metrics:not(.is-featured) .award-card-cta{padding-top:7px}
 
 .award-card.is-featured .award-card-rank{
   align-self:center;

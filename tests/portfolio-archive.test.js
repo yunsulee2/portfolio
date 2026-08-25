@@ -230,19 +230,23 @@ test('the school hackathon uses the supplied photo only on its overview card', (
   assert.ok(!schoolAward.includes(overviewSource));
 });
 
-test('the Yogiyo hackathon shows its finalist photo and 186-team Top 8 result', () => {
+test('the Yogiyo hackathon shows its winner photo and 186-team grand prize result', () => {
   const mukbang = projectChunks().find((chunk) => chunk.includes('<h3>먹방요기'));
-  const yogiyoAward = awards.split('<!-- 05 요기요 X 오라클 해커톤 본선 -->')[1];
+  const yogiyoAward = awards.split('<!-- 05 요기요 X 오라클 해커톤 최우수상 -->')[1];
   const source = 'assets/projects/yogiyo-hackathon/1.jpg';
-  const alt = '2026 요기요 × 오라클 해커톤 먹방요기 본선 발표 현장';
+  const alt = '2026 요기요 × 오라클 AI 해커톤 최우수상 수상 보드';
 
-  assert.match(mukbang, /186개 팀 중 8팀[^<]*<\/b>에 선정돼 본선에 진출/);
-  assert.match(yogiyoAward, /186개 팀 중 8팀[^<]*<\/b>에 선정돼 본선에 진출/);
+  assert.match(mukbang, /186개 팀 중 본선 8팀[^<]*<\/b>에 선정된 뒤[^]*최우수상\(1위 · 상금 200만원\)/);
+  assert.match(yogiyoAward, /186개 팀 중 본선 8팀[^<]*<\/b>에 선정된 뒤[^]*최우수상\(1위 · 상금 200만원\)/);
+  assert.match(yogiyoAward, /상금 200만원/);
   assert.ok(yogiyoAward.includes(`src="${source}"`));
   assert.ok(yogiyoAward.includes(`alt="${alt}"`));
   assert.ok(fs.existsSync(path.join(root, source)));
-  assert.match(appJs, /'05': \{[\s\S]*?proof: '186팀 중 본선 8팀'[\s\S]*?photo: true/);
-  assert.match(appJs, /photoPosition: 'center 72%'/);
+  assert.match(appJs, /'05': \{[\s\S]*?rank: '최종 1위'[\s\S]*?status: 'GRAND WINNER'[\s\S]*?winner: true[\s\S]*?photo: true/);
+  assert.match(appJs, /proof: '최우수상 · 상금 200만원'/);
+  assert.match(appJs, /if \(highlight\.metrics\?\.length\) button\.classList\.add\('has-metrics'\)/);
+  assert.match(appJs, /\{ value: '186팀', label: '참가 규모' \}[\s\S]*?\{ value: '8팀', label: '본선 진출' \}[\s\S]*?\{ value: '1위', label: '최종 순위' \}/);
+  assert.match(appJs, /photoPosition: 'center 62%'/);
 });
 
 test('the project overview adds premium hierarchy without hiding the full catalog', () => {
@@ -259,7 +263,7 @@ test('the project overview adds premium hierarchy without hiding the full catalo
 });
 
 test('the award overview gives every placement a prominent result label', () => {
-  for (const result of ['종합 1위', '부문 1위', '우수상', '본선', 'TOP 8']) {
+  for (const result of ['종합 1위', '부문 1위', '우수상', '본선', '최종 1위']) {
     assert.ok(appJs.includes(`rank: '${result}'`), `${result} is surfaced`);
   }
 
