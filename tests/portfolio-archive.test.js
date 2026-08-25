@@ -230,6 +230,21 @@ test('the school hackathon uses the supplied photo only on its overview card', (
   assert.ok(!schoolAward.includes(overviewSource));
 });
 
+test('the Yogiyo hackathon shows its finalist photo and 186-team Top 8 result', () => {
+  const mukbang = projectChunks().find((chunk) => chunk.includes('<h3>먹방요기'));
+  const yogiyoAward = awards.split('<!-- 05 요기요 X 오라클 해커톤 본선 -->')[1];
+  const source = 'assets/projects/yogiyo-hackathon/1.jpg';
+  const alt = '2026 요기요 × 오라클 해커톤 먹방요기 본선 발표 현장';
+
+  assert.match(mukbang, /186개 팀 중 8팀[^<]*<\/b>에 선정돼 본선에 진출/);
+  assert.match(yogiyoAward, /186개 팀 중 8팀[^<]*<\/b>에 선정돼 본선에 진출/);
+  assert.ok(yogiyoAward.includes(`src="${source}"`));
+  assert.ok(yogiyoAward.includes(`alt="${alt}"`));
+  assert.ok(fs.existsSync(path.join(root, source)));
+  assert.match(appJs, /'05': \{[\s\S]*?proof: '186팀 중 본선 8팀'[\s\S]*?photo: true/);
+  assert.match(appJs, /photoPosition: 'center 72%'/);
+});
+
 test('the project overview adds premium hierarchy without hiding the full catalog', () => {
   assert.match(appJs, /const isSpotlight = projectIndex < 5/);
   assert.match(appJs, /button\.classList\.toggle\('has-live', Boolean\(liveLink\)\)/);

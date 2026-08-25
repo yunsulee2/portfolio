@@ -134,7 +134,13 @@
         overviewImage: 'assets/projects/school-hackathon/card.jpg',
       },
       '04': { rank: '본선', proof: 'Track B · AI 솔루션', status: 'FINALIST' },
-      '05': { rank: 'TOP 8', proof: '본선 8팀 선정', status: 'FINALIST' },
+      '05': {
+        rank: 'TOP 8',
+        proof: '186팀 중 본선 8팀',
+        status: 'FINALIST',
+        photo: true,
+        photoPosition: 'center 72%',
+      },
     };
     const highlight = highlights[award.id] || {
       rank: award.chips[0] || '수상',
@@ -146,6 +152,7 @@
     button.className = 'award-card';
     if (highlight.featured) button.classList.add('is-featured');
     if (highlight.winner) button.classList.add('is-winner');
+    if (highlight.photoPosition) button.style.setProperty('--award-photo-position', highlight.photoPosition);
     button.dataset.open = `award:${award.id}`;
     button.dataset.result = highlight.rank;
     button.setAttribute('aria-label', `${award.id}. ${award.title}, ${highlight.rank}, 자세히 보기`);
