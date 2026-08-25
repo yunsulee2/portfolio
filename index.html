@@ -217,8 +217,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
     </button>
     <nav class="app-scene-nav" aria-label="메인 장면">
       <button type="button" data-scene-target="intro" class="is-active"><span>01</span> 소개</button>
-      <button type="button" data-scene-target="projects"><span>02</span> 프로젝트</button>
-      <button type="button" data-scene-target="awards"><span>03</span> 수상</button>
+      <button type="button" data-scene-target="awards"><span>02</span> 수상</button>
+      <button type="button" data-scene-target="projects"><span>03</span> 프로젝트</button>
     </nav>
     <div class="app-actions">
       <button class="app-back" type="button" data-back hidden>← 전체 보기</button>
@@ -226,7 +226,7 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
     </div>
   </header>
 
-  <section id="portfolio-home" class="portfolio-home" aria-label="소개, 프로젝트 및 수상">
+  <section id="portfolio-home" class="portfolio-home" aria-label="소개, 수상 및 프로젝트">
     <article class="home-scene profile-scene" data-scene="intro" tabindex="-1">
       <img src="assets/me.png" alt="이윤수" class="profile-scene-photo">
       <div class="profile-scene-shade"></div>
@@ -244,31 +244,31 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
           <a href="https://github.com/yunsulee2" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </div>
       </div>
-      <button class="profile-scroll-cue" type="button" data-scene-jump="projects">
-        프로젝트 보기 <span aria-hidden="true">↓</span>
+      <button class="profile-scroll-cue" type="button" data-scene-jump="awards">
+        수상 보기 <span aria-hidden="true">↓</span>
       </button>
-    </article>
-
-    <article class="home-scene project-scene" data-scene="projects" tabindex="-1">
-      <header class="scene-heading">
-        <div>
-          <p class="scene-kicker">02 · Selected Work</p>
-          <h2>프로젝트</h2>
-        </div>
-        <p><b>15개</b>의 작업을 선택해 자세히 볼 수 있습니다.</p>
-      </header>
-      <div id="project-overview" class="project-overview-grid" aria-label="프로젝트 목록"></div>
     </article>
 
     <article class="home-scene award-scene" data-scene="awards" tabindex="-1">
       <header class="scene-heading">
         <div>
-          <p class="scene-kicker">03 · Recognition</p>
+          <p class="scene-kicker">02 · Recognition</p>
           <h2>수상</h2>
         </div>
         <p><b>5개</b>의 성과를 한눈에 확인할 수 있습니다.</p>
       </header>
       <div id="award-overview" class="award-overview-grid" aria-label="수상 목록"></div>
+    </article>
+
+    <article class="home-scene project-scene" data-scene="projects" tabindex="-1">
+      <header class="scene-heading">
+        <div>
+          <p class="scene-kicker">03 · Selected Work</p>
+          <h2>프로젝트</h2>
+        </div>
+        <p><b>15개</b>의 작업을 선택해 자세히 볼 수 있습니다.</p>
+      </header>
+      <div id="project-overview" class="project-overview-grid" aria-label="프로젝트 목록"></div>
     </article>
   </section>
 
