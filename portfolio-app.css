@@ -563,12 +563,7 @@ body.portfolio-app-ready .portfolio-app{
   transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;
 }
 
-.award-card:first-child{
-  grid-row:span 2;
-  background:
-    radial-gradient(circle at 82% 16%,rgba(247,215,121,.2),transparent 29%),
-    linear-gradient(145deg,rgba(247,215,121,.12),rgba(255,255,255,.025) 58%);
-}
+.award-card:nth-child(-n+2){grid-column:span 3}
 
 .award-card.is-winner{
   background:
@@ -598,11 +593,6 @@ body.portfolio-app-ready .portfolio-app{
   letter-spacing:-.08em;
   white-space:nowrap;
   pointer-events:none;
-}
-
-.award-card:first-child::after{
-  color:rgba(247,215,121,.06);
-  font-size:clamp(112px,11vw,184px);
 }
 
 .award-card:hover,
@@ -1036,7 +1026,7 @@ body.portfolio-app-ready .portfolio-app{
   .project-card-subtitle,.project-card-foot{display:none}
   .award-overview-grid{grid-template-columns:1fr;grid-template-rows:repeat(5,minmax(0,1fr));gap:7px}
   .award-card,
-  .award-card:first-child{
+  .award-card:nth-child(-n+2){
     grid-column:auto;
     grid-row:auto;
     padding:10px 12px;

@@ -115,14 +115,14 @@
   const createAwardCard = (award) => {
     const highlights = {
       '01': {
-        rank: '종합 1위',
+        rank: '최종 1위',
         proof: '193팀 중 1등',
         status: 'GRAND WINNER',
-        featured: true,
         winner: true,
+        photo: true,
         metrics: [
           { value: '193팀', label: '참가 규모' },
-          { value: '1위', label: '종합 순위' },
+          { value: '1위', label: '최종 순위' },
           { value: '2일', label: '무박 개발' },
         ],
       },
@@ -140,7 +140,7 @@
         status: 'GRAND WINNER',
         winner: true,
         photo: true,
-        photoPosition: 'center 62%',
+        photoPosition: 'center 48%',
         metrics: [
           { value: '186팀', label: '참가 규모' },
           { value: '8팀', label: '본선 진출' },
@@ -192,12 +192,16 @@
 
   const renderOverview = () => {
     projectOverview.replaceChildren(...projects.map(createProjectCard));
-    awardOverview.replaceChildren(...awards.map(createAwardCard));
+    const awardOverviewOrder = ['01', '05', '02', '03', '04'];
+    const overviewAwards = awardOverviewOrder
+      .map((awardId) => awards.find((award) => award.id === awardId))
+      .filter(Boolean);
+    awardOverview.replaceChildren(...overviewAwards.map(createAwardCard));
 
     const projectCount = app.querySelector('.project-scene .scene-heading > p');
     const awardCount = app.querySelector('.award-scene .scene-heading > p');
     if (projectCount) projectCount.innerHTML = `<b>${projects.length}개</b>의 작업을 선택해 자세히 볼 수 있습니다.`;
-    if (awardCount) awardCount.innerHTML = `<b>종합·부문 1위 3회</b>를 포함한 ${awards.length}개의 성과입니다.`;
+    if (awardCount) awardCount.innerHTML = `<b>1위 수상 3회</b>를 포함한 ${awards.length}개의 성과입니다.`;
   };
 
   const mediaMarkup = (item) => {

@@ -234,7 +234,7 @@ test('the Yogiyo hackathon shows its winner photo and 186-team grand prize resul
   const mukbang = projectChunks().find((chunk) => chunk.includes('<h3>먹방요기'));
   const yogiyoAward = awards.split('<!-- 05 요기요 X 오라클 해커톤 최우수상 -->')[1];
   const source = 'assets/projects/yogiyo-hackathon/1.jpg';
-  const alt = '2026 요기요 × 오라클 AI 해커톤 최우수상 수상 보드';
+  const alt = '2026 요기요 × 오라클 AI 해커톤 최우수상 수상 기념사진';
 
   assert.match(mukbang, /186개 팀 중 본선 8팀[^<]*<\/b>에 선정된 뒤[^]*최우수상\(1위 · 상금 200만원\)/);
   assert.match(yogiyoAward, /186개 팀 중 본선 8팀[^<]*<\/b>에 선정된 뒤[^]*최우수상\(1위 · 상금 200만원\)/);
@@ -242,11 +242,15 @@ test('the Yogiyo hackathon shows its winner photo and 186-team grand prize resul
   assert.ok(yogiyoAward.includes(`src="${source}"`));
   assert.ok(yogiyoAward.includes(`alt="${alt}"`));
   assert.ok(fs.existsSync(path.join(root, source)));
+  assert.equal(
+    crypto.createHash('sha256').update(fs.readFileSync(path.join(root, source))).digest('hex'),
+    'f00481fc73d875bba706ae44d28b8709fa01340c74cea86aa0a45be8b5f66477',
+  );
   assert.match(appJs, /'05': \{[\s\S]*?rank: '최종 1위'[\s\S]*?status: 'GRAND WINNER'[\s\S]*?winner: true[\s\S]*?photo: true/);
   assert.match(appJs, /proof: '최우수상 · 상금 200만원'/);
   assert.match(appJs, /if \(highlight\.metrics\?\.length\) button\.classList\.add\('has-metrics'\)/);
   assert.match(appJs, /\{ value: '186팀', label: '참가 규모' \}[\s\S]*?\{ value: '8팀', label: '본선 진출' \}[\s\S]*?\{ value: '1위', label: '최종 순위' \}/);
-  assert.match(appJs, /photoPosition: 'center 62%'/);
+  assert.match(appJs, /photoPosition: 'center 48%'/);
 });
 
 test('the project overview adds premium hierarchy without hiding the full catalog', () => {
@@ -263,17 +267,26 @@ test('the project overview adds premium hierarchy without hiding the full catalo
 });
 
 test('the award overview gives every placement a prominent result label', () => {
-  for (const result of ['종합 1위', '부문 1위', '우수상', '본선', '최종 1위']) {
+  const codegateAward = awards
+    .split('<!-- 01 2026 코드게이트 AI 스타트업 해커톤 최종 1위 -->')[1]
+    .split('<!-- 02 2026 AX 인재전쟁 해커톤 본선 -->')[0];
+
+  for (const result of ['부문 1위', '우수상', '본선']) {
     assert.ok(appJs.includes(`rank: '${result}'`), `${result} is surfaced`);
   }
+  assert.equal((appJs.match(/rank: '최종 1위'/g) || []).length, 2);
+  assert.match(codegateAward, /최종 1위 · 193팀 중 1등/);
+  assert.doesNotMatch(codegateAward, /종합 1위/);
 
   assert.match(appJs, /button\.dataset\.result = highlight\.rank/);
   assert.match(appJs, /award-card-rank/);
   assert.match(appJs, /'02': \{[^}]*photo: true/);
   assert.match(appJs, /const cardImageSource = highlight\.overviewImage/);
   assert.match(appJs, /\(highlight\.featured \|\| highlight\.photo\) \? award\.images\[0\]\?\.src/);
+  assert.match(appJs, /const awardOverviewOrder = \['01', '05', '02', '03', '04'\]/);
   assert.match(appCss, /grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/);
-  assert.match(appCss, /\.award-card:first-child\{[\s\S]*?grid-row:span 2/);
+  assert.match(appCss, /\.award-card:nth-child\(-n\+2\)\{grid-column:span 3\}/);
+  assert.doesNotMatch(appCss, /\.award-card:first-child\{[\s\S]*?grid-row:span 2/);
 });
 
 test('project and award details support explicit and browser back navigation', () => {
