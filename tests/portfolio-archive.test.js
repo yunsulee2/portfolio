@@ -193,9 +193,17 @@ test('Mukbang Yogi includes a browser-compatible mixed-media demo slide', () => 
 
 test('the portfolio home is reduced to exactly three overview scenes', () => {
   assert.equal((html.match(/<article class="home-scene/g) || []).length, 3);
-  assert.match(html, /data-scene="intro"/);
-  assert.match(html, /data-scene="projects"/);
-  assert.match(html, /data-scene="awards"/);
+  assert.match(
+    html,
+    /data-scene-target="intro"[^>]*><span>01<\/span> 소개<\/button>[\s\S]*?data-scene-target="awards"[^>]*><span>02<\/span> 수상<\/button>[\s\S]*?data-scene-target="projects"[^>]*><span>03<\/span> 프로젝트<\/button>/,
+  );
+  assert.match(
+    html,
+    /data-scene="intro"[\s\S]*?data-scene="awards"[\s\S]*?data-scene="projects"/,
+  );
+  assert.match(html, /data-scene-jump="awards">\s*수상 보기/);
+  assert.match(html, /02 · Recognition/);
+  assert.match(html, /03 · Selected Work/);
   assert.match(html, /id="project-overview"/);
   assert.match(html, /id="award-overview"/);
 });
