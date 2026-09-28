@@ -146,6 +146,11 @@ section{padding:104px 0;border-top:1px solid var(--line)}
 .wshot{cursor:zoom-in;border:1px solid var(--line);background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s,border-color .3s}
 .wshot:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--line2)}
 .wshot img{width:100%;height:auto;display:block}
+.wshot.video-shot{cursor:default;background:#000}
+.wshot.video-shot:hover{transform:none}
+.wshot video{width:100%;height:auto;display:block;aspect-ratio:16/9;background:#000}
+.wvideos{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.wvideo-cap{font-size:13px;color:var(--fg3);margin:8px 2px 0}
 
 /* PROCESS */
 .proc{display:grid;grid-template-columns:1.05fr 1.35fr;gap:56px;align-items:start}
@@ -911,6 +916,10 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
        </ul>
        <div class="metarow">
          <div class="tech"><span class="tag">React 19</span><span class="tag">TypeScript</span><span class="tag">Zustand</span><span class="tag">ECharts</span><span class="tag">Three.js</span><span class="tag">Vercel</span></div>
+       </div>
+       <div class="wshots wvideos">
+         <figure style="margin:0"><div class="wshot video-shot"><video src="assets/projects/baton/demo.mp4" poster="assets/projects/baton/demo-poster.jpg" aria-label="바통 서비스 시연 영상 — 소크라테스식 인터뷰부터 인수인계 문서·지식 그래프 생성까지" controls playsinline preload="metadata"></video></div><figcaption class="wvideo-cap">서비스 시연 영상</figcaption></figure>
+         <figure style="margin:0"><div class="wshot video-shot"><video src="assets/projects/baton/demoday.mp4" poster="assets/projects/baton/demoday-poster.jpg" aria-label="코드게이트 2026 AI 스타트업 해커톤 데모데이 발표 영상" controls playsinline preload="metadata"></video></div><figcaption class="wvideo-cap">코드게이트 데모데이 발표 영상</figcaption></figure>
        </div>
        <div class="wshots">
          <div class="wshot"><img src="assets/projects/baton/1.jpg" alt="바통 랜딩 — 바통터치로 넘기고, 바통창고에 남기고"></div>
