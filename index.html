@@ -1205,12 +1205,18 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
           <li><span class="ix">02</span><span><b>성과</b> — 메디테라피 부문 <b>1위</b>, 최종 6인 진출</span></li>
           <li><span class="ix">03</span><span><b>강점</b> — 비교군(대조군) 논리 설계로 결과의 유의성을 입증</span></li>
           <li><span class="ix">04</span><span><b>결과물</b> — 근거 기반 시딩 엔진 (플러그인 + 시뮬레이터 웹)</span></li>
+          <li><span class="ix">05</span><span><b>인정</b> — 6개 도메인 챔피언 중 <b>메디테라피 도메인 챔피언</b>으로 호명</span></li>
         </ul>
         <div class="metarow">
           <div class="tech"><span class="tag">메디테라피</span><span class="tag">시딩 엔진</span><span class="tag">비교군 논리</span><span class="tag">AX 인재전쟁 2026</span></div>
         </div>
       </div>
       <div class="wshots awshots">
+        <div class="wshot"><img src="assets/projects/ax-talent-war/2.jpg" alt="AX 인재전쟁 본선에서 메디테라피 부문 1위로 호명된 뒤 축하받는 이윤수" loading="lazy"></div>
+        <div class="wshot"><img src="assets/projects/ax-talent-war/3.jpg" alt="AX 인재전쟁 도메인 챔피언 6인 발표 화면 — 메디테라피 이윤수" loading="lazy"></div>
+        <div class="wshot video-shot"><video src="assets/projects/ax-talent-war/announce.mp4" poster="assets/projects/ax-talent-war/announce-poster.jpg" aria-label="AX 인재전쟁 메디테라피 부문 1위 발표 순간 영상" controls playsinline preload="metadata"></video></div>
+        <div class="wshot"><img src="assets/projects/ax-talent-war/4.jpg" alt="AX 인재전쟁 본선 최종 피칭에서 발표하는 이윤수" loading="lazy"></div>
+        <div class="wshot"><img src="assets/projects/ax-talent-war/5.jpg" alt="AX 인재전쟁 본선 3시간 과제에 몰입한 이윤수" loading="lazy"></div>
         <div class="wshot"><img src="assets/projects/ax-talent-war/1.jpg" alt="2026 AX 인재전쟁 해커톤 현장에서 인터뷰하는 이윤수" loading="lazy"></div>
       </div>
     </div>
@@ -1383,7 +1389,8 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 .awshots{display:flex;flex-wrap:wrap;gap:16px}
 .awshots .wshot{height:clamp(280px,34vw,400px)}
 .awshots .wshot img{width:auto;height:100%}
-@media(max-width:560px){.awshots .wshot{height:auto;width:100%}.awshots .wshot img{width:100%;height:auto}}
+.awshots .wshot video{width:auto;height:100%;display:block;background:#000}
+@media(max-width:560px){.awshots .wshot{height:auto;width:100%}.awshots .wshot img,.awshots .wshot video{width:100%;height:auto}}
 @media(max-width:860px){
   .pf-panel{grid-template-columns:1fr;gap:26px;min-height:auto;padding:70px 24px}
   .pf-view{order:-1}
