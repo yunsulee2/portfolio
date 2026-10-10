@@ -147,6 +147,8 @@
           { value: '1위', label: '최종 순위' },
         ],
       },
+      '06': { rank: '본선 진출', proof: '예선 통과 · 본선 7팀', status: 'FINALIST' },
+      '07': { rank: '1차 합격', proof: 'SK하이닉스 · AI 네이티브 인재', status: 'IN PROGRESS' },
     };
     const highlight = highlights[award.id] || {
       rank: award.chips[0] || '수상',
@@ -192,7 +194,7 @@
 
   const renderOverview = () => {
     projectOverview.replaceChildren(...projects.map(createProjectCard));
-    const awardOverviewOrder = ['01', '05', '02', '03', '04'];
+    const awardOverviewOrder = ['01', '05', '02', '03', '04', '06', '07'];
     const overviewAwards = awardOverviewOrder
       .map((awardId) => awards.find((award) => award.id === awardId))
       .filter(Boolean);

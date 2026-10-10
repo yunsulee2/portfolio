@@ -539,14 +539,14 @@ body.portfolio-app-ready .portfolio-app{
   flex:1;
   min-height:0;
   display:grid;
-  grid-template-columns:repeat(6,minmax(0,1fr));
+  grid-template-columns:repeat(12,minmax(0,1fr));
   grid-template-rows:repeat(2,minmax(0,1fr));
   gap:clamp(10px,1vw,16px);
 }
 
 .award-card{
   position:relative;
-  grid-column:span 2;
+  grid-column:span 3;
   min-width:0;
   min-height:0;
   padding:clamp(17px,1.8vw,28px);
@@ -563,7 +563,7 @@ body.portfolio-app-ready .portfolio-app{
   transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;
 }
 
-.award-card:nth-child(-n+2){grid-column:span 3}
+.award-card:nth-child(-n+3){grid-column:span 4}
 
 .award-card.is-winner{
   background:
@@ -985,7 +985,7 @@ body.portfolio-app-ready .portfolio-app{
   .profile-scene-copy{left:clamp(32px,6vw,72px);width:min(48vw,520px)}
   .profile-scene-copy h1{font-size:clamp(62px,10vw,100px)}
   .project-overview-grid{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))}
-  .award-overview-grid{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+  .award-overview-grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
   .portfolio-detail-content{grid-template-columns:1fr;padding:32px 24px 56px;gap:26px;align-items:start}
   .detail-media{order:-1}
   .detail-stage,.detail-award-poster{height:min(52vh,500px)}
@@ -1024,13 +1024,13 @@ body.portfolio-app-ready .portfolio-app{
   .project-card-main{gap:0}
   .project-card-title,.project-card.is-spotlight .project-card-title{font-size:9px;letter-spacing:-.01em}
   .project-card-subtitle,.project-card-foot{display:none}
-  .award-overview-grid{grid-template-columns:1fr;grid-template-rows:repeat(5,minmax(0,1fr));gap:7px}
+  .award-overview-grid{grid-template-columns:1fr;grid-template-rows:repeat(7,minmax(0,1fr));gap:7px}
   .award-card,
-  .award-card:nth-child(-n+2){
+  .award-card:nth-child(-n+3){
     grid-column:auto;
     grid-row:auto;
     padding:10px 12px;
-    grid-template-columns:82px minmax(0,1fr) 28px;
+    grid-template-columns:92px minmax(0,1fr) 28px;
     grid-template-rows:auto 1fr;
     align-items:center;
     column-gap:11px;
@@ -1043,12 +1043,14 @@ body.portfolio-app-ready .portfolio-app{
   .award-card-index{font-size:7px}
   .award-card-status{padding:3px 6px;font-size:6px}
   .award-card-rank,
-  .award-card.is-featured .award-card-rank{
+  .award-card.is-featured .award-card-rank,
+  .award-card.has-metrics:not(.is-featured) .award-card-rank{
     grid-column:1;
     grid-row:2;
     align-self:center;
-    font-size:24px;
+    font-size:21px;
     line-height:1;
+    white-space:nowrap;
   }
   .award-card-content{grid-column:2;grid-row:2;align-self:center;gap:4px;min-width:0}
   .award-card.is-featured .award-card-content{align-self:center}

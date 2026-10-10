@@ -208,10 +208,10 @@ test('the portfolio home is reduced to exactly three overview scenes', () => {
   assert.match(html, /id="award-overview"/);
 });
 
-test('the overview reuses all 15 projects and all 5 awards as clickable detail sources', () => {
+test('the overview reuses all 15 projects and all 7 awards as clickable detail sources', () => {
   assert.ok(appJs.includes("work.querySelectorAll('.entry:not([data-portfolio-status=\"archived\"])')"));
   assert.ok(appJs.includes("awardsSource.querySelectorAll(':scope > .wrap > .entry')"));
-  assert.equal((awards.match(/<div class="entry rev">/g) || []).length, 5);
+  assert.equal((awards.match(/<div class="entry rev">/g) || []).length, 7);
   assert.ok(appJs.includes("button.dataset.open = `project:${project.id}`"));
   assert.ok(appJs.includes("button.dataset.open = `award:${award.id}`"));
 });
@@ -279,7 +279,7 @@ test('the award overview gives every placement a prominent result label', () => 
     .split('<!-- 01 2026 코드게이트 AI 스타트업 해커톤 최종 1위 -->')[1]
     .split('<!-- 02 2026 AX 인재전쟁 해커톤 본선 -->')[0];
 
-  for (const result of ['부문 1위', '우수상', '본선']) {
+  for (const result of ['부문 1위', '우수상', '본선', '본선 진출', '1차 합격']) {
     assert.ok(appJs.includes(`rank: '${result}'`), `${result} is surfaced`);
   }
   assert.equal((appJs.match(/rank: '최종 1위'/g) || []).length, 2);
@@ -291,9 +291,9 @@ test('the award overview gives every placement a prominent result label', () => 
   assert.match(appJs, /'02': \{[^}]*photo: true/);
   assert.match(appJs, /const cardImageSource = highlight\.overviewImage/);
   assert.match(appJs, /\(highlight\.featured \|\| highlight\.photo\) \? award\.images\[0\]\?\.src/);
-  assert.match(appJs, /const awardOverviewOrder = \['01', '05', '02', '03', '04'\]/);
-  assert.match(appCss, /grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/);
-  assert.match(appCss, /\.award-card:nth-child\(-n\+2\)\{grid-column:span 3\}/);
+  assert.match(appJs, /const awardOverviewOrder = \['01', '05', '02', '03', '04', '06', '07'\]/);
+  assert.match(appCss, /grid-template-columns:repeat\(12,minmax\(0,1fr\)\)/);
+  assert.match(appCss, /\.award-card:nth-child\(-n\+3\)\{grid-column:span 4\}/);
   assert.doesNotMatch(appCss, /\.award-card:first-child\{[\s\S]*?grid-row:span 2/);
 });
 
