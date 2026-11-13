@@ -27,7 +27,7 @@ async function init() {
   const at = (f, r, u) => BASE_POS.clone().addScaledVector(fwd, f).addScaledVector(right, r).add(new THREE.Vector3(0, u, 0));
 
   // room.spz is split into <25MB parts (GitHub upload limit) and re-joined here.
-  const PARTS = ["room.spz.part-aa", "room.spz.part-ab"].map((f) => `assets/dev-room/${f}`);
+  const PARTS = ["room.spz.part-aa", "room.spz.part-ab", "room.spz.part-ac"].map((f) => `assets/dev-room/${f}`);
   let loaded = false;
   const room = await Promise.all(PARTS.map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.arrayBuffer(); })))
     .then((bufs) => {
