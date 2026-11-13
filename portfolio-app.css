@@ -1094,3 +1094,42 @@ body.portfolio-app-ready .portfolio-app{
   body.portfolio-app-ready > #contact,
   body.portfolio-app-ready > footer{display:block!important}
 }
+
+/* ── 3D developer's room (intro background) ── */
+.profile-scene{background:#120c08}
+.room-stage{position:absolute;inset:0;overflow:hidden}
+.room-video,.room-canvas{position:absolute;inset:0;width:100%;height:100%}
+.room-video{object-fit:cover;transition:opacity 1.2s ease}
+.room-canvas{opacity:0;transition:opacity 1.2s ease}
+.room-canvas canvas{display:block;width:100%!important;height:100%!important;cursor:grab;touch-action:pan-y}
+.room-canvas canvas:active{cursor:grabbing}
+.room-stage.is-3d .room-canvas{opacity:1}
+.room-stage.is-3d .room-video{opacity:0;pointer-events:none}
+.room-video{animation:none}
+.profile-scene .profile-scene-shade{
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(14,9,5,0) 60%,rgba(14,9,5,.55) 100%),
+    linear-gradient(90deg,rgba(14,9,5,.86) 0,rgba(14,9,5,.62) 30%,rgba(14,9,5,.08) 58%,rgba(14,9,5,0));
+}
+.profile-scene .profile-scene-copy{pointer-events:none}
+.profile-scene .profile-scene-copy a{pointer-events:auto}
+.profile-scene .profile-scene-copy > p:not(.scene-kicker){color:#f1e3d2}
+.profile-scene .scene-kicker{color:#ffc98a}
+.profile-scene .profile-scene-meta{color:#d8c3ab}
+.profile-scene .profile-scene-links a:hover{border-color:#ffc98a;color:#ffe2bd}
+.profile-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;margin-bottom:18px;border:2px solid rgba(255,236,214,.55);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.room-hot{position:absolute;left:0;top:0;z-index:2;display:flex;align-items:center;gap:9px;margin:-9px 0 0 -9px;padding:0;border:0;background:none;color:#fff;font:600 12px/1 var(--sans,system-ui);text-decoration:none;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s}
+.room-hot.is-on{opacity:1;pointer-events:auto}
+.room-hot i{width:18px;height:18px;flex:none;border-radius:50%;background:#ffe2b8;box-shadow:0 0 0 6px rgba(255,214,160,.28),0 0 22px #ffad55;animation:room-pulse 2.2s ease-in-out infinite}
+.room-hot span{padding:7px 11px;border-radius:999px;background:rgba(28,16,8,.68);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);white-space:nowrap;opacity:0;transform:translateX(-4px);transition:.25s}
+.room-hot:hover span,.room-hot:focus-visible span{opacity:1;transform:none}
+@keyframes room-pulse{50%{box-shadow:0 0 0 12px rgba(255,214,160,0),0 0 22px #ffad55}}
+.room-hint{position:absolute;right:28px;bottom:26px;z-index:2;margin:0;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,236,214,.7);opacity:0;transition:opacity 1s}
+.room-stage.is-3d .room-hint{opacity:1}
+@media(max-width:620px){
+  .room-video{object-position:68% center}
+  .profile-scene .profile-scene-shade{background:linear-gradient(180deg,rgba(14,9,5,0) 30%,rgba(14,9,5,.6) 58%,rgba(14,9,5,.96) 88%)}
+  .profile-avatar{width:44px;height:44px;margin-bottom:12px}
+}
+@media(prefers-reduced-motion:reduce){.room-video{display:none}.room-stage{background:url(assets/dev-room/poster.jpg) center/cover}}

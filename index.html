@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="portfolio-app.css">
 <script src="portfolio-app.js" defer></script>
+<script type="importmap">{"imports":{"three":"https://cdnjs.cloudflare.com/ajax/libs/three.js/0.178.0/three.module.js","@sparkjsdev/spark":"https://sparkjs.dev/releases/spark/0.1.10/spark.module.js"}}</script>
+<script type="module" src="assets/dev-room/room.js"></script>
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 
@@ -233,9 +235,17 @@ footer .fin{display:flex;justify-content:space-between;align-items:center;flex-w
 
   <section id="portfolio-home" class="portfolio-home" aria-label="소개, 수상 및 프로젝트">
     <article class="home-scene profile-scene" data-scene="intro" tabindex="-1">
-      <img src="assets/me.png" alt="이윤수" class="profile-scene-photo">
+      <div class="room-stage" data-room-stage aria-label="노을이 드는 개발자의 작업실 (3D)">
+        <video class="room-video" src="assets/dev-room/room-tour.mp4" poster="assets/dev-room/poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <div class="room-canvas"></div>
+        <button class="room-hot" type="button" data-hot="1.6,-0.14,0.05" data-scene-jump="projects"><i></i><span>노트북 · 프로젝트 보기</span></button>
+        <button class="room-hot" type="button" data-hot="1.7,0.68,0.15" data-scene-jump="awards"><i></i><span>포스트잇 · 수상 보기</span></button>
+        <a class="room-hot" data-hot="1.5,-0.47,0.24" href="https://github.com/yunsulee2" target="_blank" rel="noopener noreferrer"><i></i><span>책장 · GitHub ↗</span></a>
+        <p class="room-hint">드래그해서 작업실 둘러보기</p>
+      </div>
       <div class="profile-scene-shade"></div>
       <div class="profile-scene-copy">
+        <img src="assets/profile.jpg" alt="이윤수" class="profile-avatar">
         <p class="scene-kicker">01 · Flutter Developer</p>
         <h1>이윤수</h1>
         <p>아이디어를 빠르게 실제 제품으로 구현하는 개발자입니다.</p>
